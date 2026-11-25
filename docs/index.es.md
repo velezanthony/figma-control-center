@@ -24,6 +24,10 @@ Las herramientas reciben **rutas de fichero**, no código. El servidor lee el
 script, lo manda a la pestaña y deja en disco los resultados grandes: los megas
 nunca pasan por el contexto del modelo.
 
+Todo lo que hace el servidor se ve, en directo, en un panel local:
+
+![Un recorrido por el panel: Inicio, Actividad, Jobs, Capturas, Intentos, Chat, Proyectos, Ajustes y Ayuda](assets/dashboard/tour-light.gif)
+
 **Por dónde empezar:** [instálalo](users/installation.es.md) y después [mira las herramientas](users/tools.es.md).
 
 ## Qué hay dentro

@@ -55,6 +55,10 @@ wires concrete adapters together.
 - **Trying a tool by hand** — `make tools` lists the tools through the MCP Inspector CLI;
   `make inspector` opens the Inspector UI against `server/src/main.ts`.
 
+The gallery, on its Atoms tab:
+
+![The component gallery on its Atoms tab: Button variants and sizes, Badge and StatusDot](../assets/dashboard/gallery-atoms.webp)
+
 ## The commands
 
 `make help` lists every target. The ones you will use:

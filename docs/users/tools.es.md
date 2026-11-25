@@ -36,6 +36,10 @@ Las herramientas de Figma responden con la misma forma:
 > a ficheros y la respuesta trae la ruta y un resumen pequeño. Lee el fichero cuando necesites el
 > detalle.
 
+En el panel, una llamada fallida se abre con su tipo de error, el mensaje y el siguiente paso:
+
+![Una fila de Actividad abierta sobre un ScriptError: el mensaje con su línea y el siguiente paso, encima de los argumentos de la llamada](../assets/dashboard/activity-error.webp)
+
 ## Jobs
 
 Una llamada que pasa del plazo blando (`FCC_SOFT_DEADLINE_MS`) responde `status: "running"` con un
@@ -50,6 +54,10 @@ Una llamada que pasa del plazo blando (`FCC_SOFT_DEADLINE_MS`) responde `status:
 > Un script que ya corre en la pestaña de Figma **no se puede interrumpir**: Figma no ofrece cómo. Si
 > el cliente se va a mitad, el job acaba `Interrupted` y el script pudo seguir. Para algo largo,
 > trocéalo en pasos con `figma_build`, que se puede cancelar entre pasos y dice dónde se paró.
+
+La página **Jobs** del panel los lista con su estado:
+
+![La página Jobs: cuándo empezó cada job, su herramienta, su id y su estado final, terminado o con error](../assets/dashboard/jobs-list.webp)
 
 ## Figma
 

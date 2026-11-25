@@ -74,6 +74,10 @@ params, the kit, and for kit steps the plans and project files they read — so 
 target can be compared line by line. See [Attempts](tools.md#attempts) and the dashboard's
 [Attempts page](dashboard.md#attempts).
 
+Here, between attempts 12 and 13 of a script, only the params changed:
+
+![Attempts: the roles of two attempts compared, with the script and kit unchanged and a line diff of the params](../assets/dashboard/attempt-diff.webp)
+
 ## Kit steps
 
 A kit step is a step of `figma_build` whose code ships with the kit: no script file, just its name and

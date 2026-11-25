@@ -106,6 +106,10 @@ página Ajustes.
 `FCC_E2E` los lee la suite de tests; ver [Tests](../contributors/testing.es.md). Las variables que
 solo usa el arnés de tests no salen aquí.
 
+Un grupo de la página de Ajustes:
+
+![El grupo Chrome y Figma de Ajustes: cada ajuste con su ayuda, su variable de entorno, el valor que rige, el de por defecto y un botón Guardar](../assets/dashboard/settings-group.webp)
+
 ## Proyectos
 
 Un proyecto es un archivo de Figma más las carpetas que las herramientas pueden tocar para él. Se da

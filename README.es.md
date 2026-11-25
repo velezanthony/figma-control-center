@@ -12,6 +12,13 @@ oficial, sin plugin y sin token de API.
 Documentación (inglés y castellano): <https://velezanthony.github.io/figma-control-center/es/>
 · [Read in English](README.md)
 
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dashboard/tour-dark.gif">
+    <img alt="Un recorrido por el panel local: Inicio, Actividad, Jobs, Capturas, Intentos, Chat, Proyectos, Ajustes y Ayuda" src="docs/assets/dashboard/tour-light.gif" width="960">
+  </picture>
+</p>
+
 ```mermaid
 flowchart LR
     A["Claude Code"] -->|"MCP (stdio)"| B["servidor Node"]

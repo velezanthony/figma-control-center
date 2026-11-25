@@ -11,6 +11,13 @@ Plugin API scripts from disk.** No official MCP, no plugin, no API token.
 Docs (English and Spanish): <https://velezanthony.github.io/figma-control-center/>
 · [Leer en castellano](README.es.md)
 
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dashboard/tour-dark.gif">
+    <img alt="A tour of the local dashboard: Home, Activity, Jobs, Captures, Attempts, Chat, Projects, Settings and Help" src="docs/assets/dashboard/tour-light.gif" width="960">
+  </picture>
+</p>
+
 ```mermaid
 flowchart LR
     A["Claude Code"] -->|"MCP (stdio)"| B["Node server"]

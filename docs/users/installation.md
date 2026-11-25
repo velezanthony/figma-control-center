@@ -102,6 +102,10 @@ Open **Projects** (`#/projects`) and add one:
 | Scripts root | Optional, one per line: folders the tools may read scripts from |
 | Output folder | Optional: where screenshots, reads and captures go (`output/<id>` by default) |
 
+The form, filled in:
+
+![The New project dialog: name, project directory, Figma file URL, and the optional scripts root and output folder](../assets/dashboard/project-new.webp)
+
 The database assigns the project a number (`1`, `2`, …): that number is what `FCC_PROJECTS` and
 `make agent PROJECT=<n>` refer to. A project added while Claude Code is running is picked up without
 a restart.
@@ -112,6 +116,11 @@ In Claude Code (see [Use it from Claude Code](claude-code.md)), call `figma_stat
 Chrome reachable, the tab found, `figma` ready, and the file and page names. If the project's tab is
 not open, the server opens it the first time a tool needs it and says so in `tabOpened`; it never
 closes tabs it did not open.
+
+The dashboard's Home shows the same checks as status pills, with the next step for whatever is not
+ready:
+
+![Home status: dashboard connected, Chrome responding, Figma ready with the file and page, and no agent listening, with a Launch agent button](../assets/dashboard/home-status.webp)
 
 `figma_status` explains each failure with a `nextStep`. The common ones:
 

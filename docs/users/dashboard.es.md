@@ -14,6 +14,8 @@ tardó, los errores con su siguiente paso, los jobs largos, los nodos tocados (c
 capturas. También es donde se dan de alta los proyectos, se editan los ajustes y vive el chat del
 agente.
 
+![Un recorrido por el panel: Inicio, Actividad, Jobs, Capturas, Intentos, Chat, Proyectos, Ajustes y Ayuda](../assets/dashboard/tour-light.gif)
+
 ```bash
 make dashboard     # compila web/ y la sirve en http://127.0.0.1:4173 (FCC_DASHBOARD_PORT)
 ```
@@ -49,6 +51,18 @@ conserva y un enlace la comparte. El proyecto elegido viaja como `?project=<núm
 > [!NOTE]
 > Sin ningún proyecto, solo están activas Inicio, Proyectos, Ajustes, Ayuda y Componentes (en modo desarrollo).
 
+Inicio responde de un vistazo a «¿está todo listo?» y enseña las últimas llamadas y errores:
+
+![Inicio: píldoras de estado del panel, Chrome, Figma y el agente, las últimas llamadas y los errores recientes](../assets/dashboard/home.webp)
+
+Actividad es el registro completo, con sus indicadores, filtros y una tabla ordenable:
+
+![Actividad: indicadores de llamadas, errores, trabajo en curso, duración media y nodos tocados, sobre la tabla filtrada de llamadas](../assets/dashboard/activity.webp)
+
+Capturas guarda cada captura junto a la llamada que la hizo:
+
+![Capturas: una rejilla de capturas de nodos con su id, tamaño, hora y un enlace a la llamada](../assets/dashboard/captures.webp)
+
 Los eventos nuevos llegan por Server-Sent Events con el id del último visto, y se reanudan al
 reconectar. Los códigos que no se explican solos (`ScriptError`, ids de sesión, `p95`, ids de nodo…)
 llevan un tooltip, también accesible con el teclado, que sale del mismo módulo que el glosario.
@@ -67,6 +81,8 @@ página de un objetivo enseña todos sus intentos y, entre dos de ellos (por def
 anterior), el estado de cada papel y el diff línea a línea de uno. Las fechas salen en hora local.
 Ningún botón escribe en Figma ni repite un intento. Es el mismo cálculo que usa `figma_history_diff`.
 
+![Intentos: los objetivos con su tipo, número de intentos, último estado y hora, con los filtros encima](../assets/dashboard/attempts.webp)
+
 ## Ajustes
 
 `#/settings` lista cada ajuste editable, agrupado, con su ayuda, su unidad y quién lo usa (panel, agente
@@ -74,6 +90,8 @@ o los dos), el valor que rige y de dónde sale: por defecto, guardado en el pane
 (aquí en solo lectura). Guardar o restablecer vale para la siguiente sesión que arranque y para el
 panel en su siguiente arranque. Puertos, rutas, la base y la orden de la terminal son de arranque y
 solo cambian en el `.env`. Ver [Configuración](configuration.es.md).
+
+![Ajustes: cada ajuste con su ayuda, su variable de entorno, el valor que rige, el de por defecto y un botón para guardar](../assets/dashboard/settings.webp)
 
 ## Trabajar en la interfaz
 
