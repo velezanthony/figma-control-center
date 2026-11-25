@@ -1,0 +1,464 @@
+/* Mini design system del panel. Único archivo donde viven colores y escalas.
+   Nivel 1 (paleta, @theme): valores sin intención.
+   Nivel 2 (roles, @theme inline + variables por tema): lo único que usan los componentes. */
+@import "tailwindcss" source(none);
+@source "./";
+
+@theme static {
+	--color-*: initial;
+	/* Fuentes del sistema: nada que descargar */
+	--font-sans:
+		ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+		Roboto, sans-serif;
+	--font-mono:
+		ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+		monospace;
+
+	/* Escala tipográfica con intención: títulos pesados y apretados, etiquetas en mayúsculas espaciadas
+	   (uppercase va aparte, en la clase). Cada token trae su interlineado, espaciado y peso */
+	--text-display: clamp(1.75rem, 2.5vw + 1rem, 2.5rem); /* título de página */
+	--text-display--line-height: 1.05;
+	--text-display--letter-spacing: -0.035em;
+	--text-display--font-weight: 800;
+	--text-stat: 2.25rem; /* cifra de una KPI */
+	--text-stat--line-height: 1;
+	--text-stat--letter-spacing: -0.03em;
+	--text-stat--font-weight: 700;
+	--text-section: 1.25rem; /* título de sección dentro de una página */
+	--text-section--line-height: 1.5;
+	--text-section--letter-spacing: -0.015em;
+	--text-section--font-weight: 700;
+	--text-heading: 0.9375rem; /* nombre de tarjeta o de elemento */
+	--text-heading--line-height: 1.5;
+	--text-heading--letter-spacing: -0.015em;
+	--text-heading--font-weight: 600;
+	--text-eyebrow: 0.6875rem; /* cabecera de tarjeta, de grupo o de tabla */
+	--text-eyebrow--line-height: 1.5;
+	--text-eyebrow--letter-spacing: 0.08em;
+	--text-eyebrow--font-weight: 700;
+
+	/* Geometría suave: esquinas redondeadas que crecen con el tamaño de la pieza. Cambiar estos tokens reescribe el
+	   radio de todos los componentes de forma coherente. */
+	--radius-sm: 0.25rem; /* 4px — etiquetas, items de menú, botones del segmentado, kbd */
+	--radius-md: 0.5rem; /* 8px — controles: botón, input, select, menú, nav, tooltip */
+	--radius-lg: 0.75rem; /* 12px — modal */
+	--radius-xl: 1rem; /* 16px — tarjetas y contenedores */
+	--radius-2xl: 1.25rem; /* 20px — campo del chat y burbuja */
+
+	/* Movimiento: salida suave para lo que responde al puntero; entrada y salida para lo que se desplaza */
+	--ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+	--ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+	--transition-duration-fast: 120ms; /* hover, foco, color */
+	--transition-duration-base: 200ms; /* giros, flotantes, elevación */
+	--transition-duration-slow: 320ms; /* paneles que se desplazan */
+	--default-transition-duration: var(--transition-duration-fast);
+	--default-transition-timing-function: var(--ease-out);
+
+	/* Resalte de una fila que acaba de llegar en vivo */
+	--animate-row-flash: row-flash 2s ease-out;
+	@keyframes row-flash {
+		from {
+			background-color: var(--brand-100);
+		}
+		to {
+			background-color: transparent;
+		}
+	}
+
+	/* violet (refinado: menos croma, tono 300 — acento sobrio, no chillón) */
+	--color-violet-50: oklch(0.965 0.018 300);
+	--color-violet-100: oklch(0.925 0.035 300);
+	--color-violet-200: oklch(0.85 0.065 300);
+	--color-violet-300: oklch(0.755 0.095 300);
+	--color-violet-400: oklch(0.655 0.115 300);
+	--color-violet-500: oklch(0.555 0.125 300);
+	--color-violet-600: oklch(0.485 0.12 300);
+	--color-violet-700: oklch(0.405 0.105 300);
+	--color-violet-800: oklch(0.345 0.09 300);
+	--color-violet-900: oklch(0.285 0.07 300);
+	--color-violet-950: oklch(0.225 0.055 300);
+	/* slate (neutros con un matiz violeta muy sutil, tono 290 — cohesión con la marca) */
+	--color-slate-0: oklch(1 0 0);
+	--color-slate-50: oklch(0.985 0.003 290);
+	--color-slate-100: oklch(0.965 0.005 290);
+	--color-slate-200: oklch(0.925 0.008 290);
+	--color-slate-300: oklch(0.87 0.012 290);
+	--color-slate-400: oklch(0.7 0.02 290);
+	--color-slate-500: oklch(0.52 0.025 290);
+	--color-slate-600: oklch(0.44 0.028 290);
+	--color-slate-700: oklch(0.37 0.03 290);
+	--color-slate-800: oklch(0.28 0.03 290);
+	--color-slate-900: oklch(0.21 0.028 290);
+	--color-slate-950: oklch(0.15 0.025 290);
+	/* green */
+	--color-green-50: oklch(0.97 0.02 150);
+	--color-green-100: oklch(0.94 0.05 150);
+	--color-green-200: oklch(0.89 0.09 150);
+	--color-green-300: oklch(0.83 0.14 150);
+	--color-green-400: oklch(0.76 0.18 150);
+	--color-green-500: oklch(0.68 0.18 150);
+	--color-green-600: oklch(0.58 0.16 150);
+	--color-green-700: oklch(0.5 0.14 150);
+	--color-green-800: oklch(0.42 0.11 150);
+	--color-green-900: oklch(0.36 0.09 150);
+	--color-green-950: oklch(0.25 0.06 150);
+	/* red */
+	--color-red-50: oklch(0.97 0.015 20);
+	--color-red-100: oklch(0.94 0.03 20);
+	--color-red-200: oklch(0.89 0.06 22);
+	--color-red-300: oklch(0.81 0.11 24);
+	--color-red-400: oklch(0.71 0.18 25);
+	--color-red-500: oklch(0.63 0.23 25);
+	--color-red-600: oklch(0.55 0.22 27);
+	--color-red-700: oklch(0.48 0.19 27);
+	--color-red-800: oklch(0.42 0.15 27);
+	--color-red-900: oklch(0.37 0.12 27);
+	--color-red-950: oklch(0.26 0.08 27);
+	/* amber */
+	--color-amber-50: oklch(0.98 0.02 90);
+	--color-amber-100: oklch(0.96 0.05 90);
+	--color-amber-200: oklch(0.92 0.1 90);
+	--color-amber-300: oklch(0.87 0.15 85);
+	--color-amber-400: oklch(0.82 0.17 80);
+	--color-amber-500: oklch(0.77 0.17 70);
+	--color-amber-600: oklch(0.66 0.16 60);
+	--color-amber-700: oklch(0.53 0.14 55);
+	--color-amber-800: oklch(0.45 0.11 50);
+	--color-amber-900: oklch(0.39 0.09 50);
+	--color-amber-950: oklch(0.27 0.06 50);
+	/* blue */
+	--color-blue-50: oklch(0.97 0.015 250);
+	--color-blue-100: oklch(0.93 0.03 250);
+	--color-blue-200: oklch(0.88 0.06 252);
+	--color-blue-300: oklch(0.81 0.1 254);
+	--color-blue-400: oklch(0.72 0.15 255);
+	--color-blue-500: oklch(0.62 0.19 256);
+	--color-blue-600: oklch(0.54 0.2 262);
+	--color-blue-700: oklch(0.47 0.19 263);
+	--color-blue-800: oklch(0.41 0.15 263);
+	--color-blue-900: oklch(0.36 0.12 263);
+	--color-blue-950: oklch(0.26 0.08 263);
+}
+
+@theme inline {
+	/* brand */
+	--color-brand-50: var(--brand-50);
+	--color-brand-100: var(--brand-100);
+	--color-brand-200: var(--brand-200);
+	--color-brand-300: var(--brand-300);
+	--color-brand-400: var(--brand-400);
+	--color-brand-500: var(--brand-500);
+	--color-brand-600: var(--brand-600);
+	--color-brand-700: var(--brand-700);
+	--color-brand-800: var(--brand-800);
+	--color-brand-900: var(--brand-900);
+	/* success */
+	--color-success-50: var(--success-50);
+	--color-success-100: var(--success-100);
+	--color-success-200: var(--success-200);
+	--color-success-300: var(--success-300);
+	--color-success-400: var(--success-400);
+	--color-success-500: var(--success-500);
+	--color-success-600: var(--success-600);
+	--color-success-700: var(--success-700);
+	/* danger */
+	--color-danger-50: var(--danger-50);
+	--color-danger-100: var(--danger-100);
+	--color-danger-200: var(--danger-200);
+	--color-danger-300: var(--danger-300);
+	--color-danger-400: var(--danger-400);
+	--color-danger-500: var(--danger-500);
+	--color-danger-600: var(--danger-600);
+	--color-danger-700: var(--danger-700);
+	/* warning */
+	--color-warning-50: var(--warning-50);
+	--color-warning-100: var(--warning-100);
+	--color-warning-200: var(--warning-200);
+	--color-warning-300: var(--warning-300);
+	--color-warning-400: var(--warning-400);
+	--color-warning-500: var(--warning-500);
+	--color-warning-600: var(--warning-600);
+	--color-warning-700: var(--warning-700);
+	/* info */
+	--color-info-50: var(--info-50);
+	--color-info-100: var(--info-100);
+	--color-info-200: var(--info-200);
+	--color-info-300: var(--info-300);
+	--color-info-400: var(--info-400);
+	--color-info-500: var(--info-500);
+	--color-info-600: var(--info-600);
+	--color-info-700: var(--info-700);
+	/* neutros y estructura */
+	--color-text-primary: var(--text-primary);
+	--color-text-secondary: var(--text-secondary);
+	--color-text-muted: var(--text-muted);
+	--color-on-brand: var(--on-brand);
+	--color-ink: var(--ink);
+	--color-ink-hover: var(--ink-hover);
+	--color-on-ink: var(--on-ink);
+	--color-sidebar-icon: var(--sidebar-icon);
+	--color-canvas: var(--canvas);
+	--color-surface: var(--surface);
+	--color-surface-raised: var(--surface-raised);
+	--color-surface-sunken: var(--surface-sunken);
+	--color-border: var(--border);
+	--color-border-strong: var(--border-strong);
+	--color-focus: var(--focus);
+	--color-overlay: var(--overlay);
+
+	/* Elevación: sombras en capas (contacto + difusa) con la tinta de cada tema; xs controles, sm tarjetas,
+	   md flotantes (menús, tooltips), lg modal */
+	--shadow-xs: var(--elevation-xs);
+	--shadow-sm: var(--elevation-sm);
+	--shadow-md: var(--elevation-md);
+	--shadow-lg: var(--elevation-lg);
+	--shadow-xl: var(--elevation-xl);
+	--shadow-modal: var(--elevation-modal);
+	--shadow-glow: var(--elevation-glow);
+}
+
+/* Tema claro por defecto: tarjetas surface (blanco) sobre canvas; el oscuro solo cambia los valores de los roles */
+:root,
+:root[data-theme="light"] {
+	color-scheme: light;
+	--brand-50: var(--color-violet-50);
+	--brand-100: var(--color-violet-100);
+	--brand-200: var(--color-violet-200);
+	--brand-300: var(--color-violet-300);
+	--brand-400: var(--color-violet-400);
+	--brand-500: var(--color-violet-500);
+	--brand-600: var(--color-violet-600);
+	--brand-700: var(--color-violet-700);
+	--brand-800: var(--color-violet-800);
+	--brand-900: var(--color-violet-900);
+	--success-50: var(--color-green-50);
+	--success-100: var(--color-green-100);
+	--success-200: var(--color-green-200);
+	--success-300: var(--color-green-300);
+	--success-400: var(--color-green-400);
+	--success-500: var(--color-green-500);
+	--success-600: var(--color-green-600);
+	--success-700: var(--color-green-700);
+	--danger-50: var(--color-red-50);
+	--danger-100: var(--color-red-100);
+	--danger-200: var(--color-red-200);
+	--danger-300: var(--color-red-300);
+	--danger-400: var(--color-red-400);
+	--danger-500: var(--color-red-500);
+	--danger-600: var(--color-red-600);
+	--danger-700: var(--color-red-700);
+	--warning-50: var(--color-amber-50);
+	--warning-100: var(--color-amber-100);
+	--warning-200: var(--color-amber-200);
+	--warning-300: var(--color-amber-300);
+	--warning-400: var(--color-amber-400);
+	--warning-500: var(--color-amber-500);
+	--warning-600: var(--color-amber-600);
+	--warning-700: var(--color-amber-700);
+	--info-50: var(--color-blue-50);
+	--info-100: var(--color-blue-100);
+	--info-200: var(--color-blue-200);
+	--info-300: var(--color-blue-300);
+	--info-400: var(--color-blue-400);
+	--info-500: var(--color-blue-500);
+	--info-600: var(--color-blue-600);
+	--info-700: var(--color-blue-700);
+	--text-primary: var(--color-slate-900);
+	--text-secondary: var(--color-slate-600);
+	--text-muted: var(--color-slate-500);
+	--on-brand: var(--color-slate-0);
+	/* Tinta: relleno de la acción principal (botón primario); la marca queda para los acentos */
+	--ink: var(--color-slate-900);
+	--ink-hover: var(--color-slate-800);
+	--on-ink: var(--color-slate-0);
+	--canvas: var(--color-slate-50);
+	--surface: var(--color-slate-0);
+	--surface-raised: var(--color-slate-50);
+	--surface-sunken: var(--color-slate-100);
+	--border: var(--color-slate-200);
+	--border-strong: var(--color-slate-500);
+	--focus: var(--color-violet-600);
+	--overlay: var(--color-slate-900);
+	--elevation-ink: var(--overlay);
+	--elevation-xs: 0 1px 2px 0
+		color-mix(in oklch, var(--elevation-ink) 4%, transparent);
+	--elevation-sm:
+		0 1px 2px 0 color-mix(in oklch, var(--elevation-ink) 4%, transparent),
+		0 1px 3px 0 color-mix(in oklch, var(--elevation-ink) 6%, transparent);
+	--elevation-md:
+		0 4px 8px -2px color-mix(in oklch, var(--elevation-ink) 6%, transparent),
+		0 2px 4px -2px color-mix(in oklch, var(--elevation-ink) 4%, transparent);
+	--elevation-lg:
+		0 12px 24px -8px color-mix(in oklch, var(--elevation-ink) 10%, transparent),
+		0 4px 8px -2px color-mix(in oklch, var(--elevation-ink) 6%, transparent);
+	--elevation-xl:
+		0 24px 48px -12px color-mix(in oklch, var(--elevation-ink) 16%, transparent),
+		0 8px 16px -4px color-mix(in oklch, var(--elevation-ink) 8%, transparent);
+	--elevation-modal: 0 24px 60px -12px
+		color-mix(in oklch, var(--elevation-ink) 40%, transparent);
+}
+
+/* Tema oscuro: mismos roles, otros valores */
+:root[data-theme="dark"],
+.theme-sidebar {
+	color-scheme: dark;
+	--brand-50: var(--color-violet-950);
+	--brand-100: var(--color-violet-900);
+	--brand-200: var(--color-violet-800);
+	--brand-300: var(--color-violet-700);
+	--brand-400: var(--color-violet-400);
+	--brand-500: var(--color-violet-500);
+	--brand-600: var(--color-violet-600);
+	--brand-700: var(--color-violet-300);
+	--brand-800: var(--color-violet-200);
+	--brand-900: var(--color-violet-100);
+	--success-50: var(--color-green-950);
+	--success-100: var(--color-green-900);
+	--success-200: var(--color-green-800);
+	--success-300: var(--color-green-700);
+	--success-400: var(--color-green-400);
+	--success-500: var(--color-green-500);
+	--success-600: var(--color-green-600);
+	--success-700: var(--color-green-300);
+	--danger-50: var(--color-red-950);
+	--danger-100: var(--color-red-900);
+	--danger-200: var(--color-red-800);
+	--danger-300: var(--color-red-700);
+	--danger-400: var(--color-red-400);
+	--danger-500: var(--color-red-500);
+	--danger-600: var(--color-red-600);
+	--danger-700: var(--color-red-300);
+	--warning-50: var(--color-amber-950);
+	--warning-100: var(--color-amber-900);
+	--warning-200: var(--color-amber-800);
+	--warning-300: var(--color-amber-700);
+	--warning-400: var(--color-amber-400);
+	--warning-500: var(--color-amber-500);
+	--warning-600: var(--color-amber-600);
+	--warning-700: var(--color-amber-300);
+	--info-50: var(--color-blue-950);
+	--info-100: var(--color-blue-900);
+	--info-200: var(--color-blue-800);
+	--info-300: var(--color-blue-700);
+	--info-400: var(--color-blue-400);
+	--info-500: var(--color-blue-500);
+	--info-600: var(--color-blue-600);
+	--info-700: var(--color-blue-300);
+	--text-primary: var(--color-slate-50);
+	--text-secondary: var(--color-slate-300);
+	--text-muted: var(--color-slate-400);
+	--on-brand: var(--color-slate-0);
+	--ink: var(--color-slate-50);
+	--ink-hover: var(--color-slate-200);
+	--on-ink: var(--color-slate-900);
+	--canvas: var(--color-slate-950);
+	--surface: var(--color-slate-900);
+	--surface-raised: var(--color-slate-800);
+	--surface-sunken: var(--color-slate-800);
+	--border: var(--color-slate-700);
+	--border-strong: var(--color-slate-400);
+	--focus: var(--color-violet-400);
+	--overlay: var(--color-slate-950);
+	/* Sobre superficies oscuras una sombra tenue no se ve: más opacidad y un filo claro arriba que separa la pieza */
+	--elevation-xs: 0 1px 2px 0
+		color-mix(in oklch, var(--elevation-ink) 40%, transparent);
+	--elevation-sm:
+		inset 0 1px 0 0 color-mix(in oklch, var(--text-primary) 4%, transparent),
+		0 1px 2px 0 color-mix(in oklch, var(--elevation-ink) 40%, transparent),
+		0 2px 6px -1px color-mix(in oklch, var(--elevation-ink) 35%, transparent);
+	--elevation-md:
+		inset 0 1px 0 0 color-mix(in oklch, var(--text-primary) 5%, transparent),
+		0 4px 8px -2px color-mix(in oklch, var(--elevation-ink) 50%, transparent),
+		0 2px 4px -2px color-mix(in oklch, var(--elevation-ink) 40%, transparent);
+	--elevation-lg:
+		inset 0 1px 0 0 color-mix(in oklch, var(--text-primary) 6%, transparent),
+		0 12px 24px -8px color-mix(in oklch, var(--elevation-ink) 60%, transparent),
+		0 4px 8px -2px color-mix(in oklch, var(--elevation-ink) 45%, transparent);
+	--elevation-xl:
+		inset 0 1px 0 0 color-mix(in oklch, var(--text-primary) 6%, transparent),
+		0 24px 48px -12px color-mix(in oklch, var(--elevation-ink) 65%, transparent),
+		0 8px 16px -4px color-mix(in oklch, var(--elevation-ink) 50%, transparent);
+	--elevation-modal:
+		inset 0 1px 0 0 color-mix(in oklch, var(--text-primary) 6%, transparent),
+		0 24px 60px -12px color-mix(in oklch, var(--elevation-ink) 70%, transparent);
+}
+
+/* Barra lateral: oscura en los dos temas, con los neutros del tema oscuro. Mismos valores siempre */
+:root {
+	--sidebar-surface: var(--color-slate-950);
+	--sidebar-control: var(--color-slate-900);
+	--sidebar-border: color-mix(in oklch, var(--color-slate-50) 8%, transparent);
+	--sidebar-text-primary: var(--color-slate-50);
+	--sidebar-text-secondary: var(--color-slate-300);
+	--sidebar-text-muted: var(--color-slate-400);
+	--sidebar-icon: var(--color-slate-400);
+	--sidebar-hover: color-mix(in oklch, var(--color-slate-50) 6%, transparent);
+	--sidebar-glow: radial-gradient(
+		500px 320px at 50% -10%,
+		color-mix(in oklch, var(--brand-500) 10%, transparent),
+		transparent 62%
+	);
+	/* Nav: seleccionado y hover en degradado horizontal de la marca que se apaga hacia la derecha */
+	--nav-selected-bg: linear-gradient(
+		90deg,
+		color-mix(in oklch, var(--brand-500) 16%, transparent),
+		color-mix(in oklch, var(--brand-500) 2%, transparent) 70%,
+		transparent
+	);
+	--nav-hover-bg: linear-gradient(
+		90deg,
+		color-mix(in oklch, var(--brand-500) 8%, transparent),
+		color-mix(in oklch, var(--brand-500) 1%, transparent) 70%,
+		transparent
+	);
+	--elevation-glow: 0 0 8px
+		color-mix(in oklch, var(--brand-500) 70%, transparent);
+}
+
+/* Dentro de la barra los roles genéricos toman los valores de la barra: los átomos (botón, select, badge,
+   tooltip) se leen sobre el fondo oscuro sin variantes propias. Los roles de marca y estado, del tema oscuro */
+.theme-sidebar {
+	--text-primary: var(--sidebar-text-primary);
+	--text-secondary: var(--sidebar-text-secondary);
+	--text-muted: var(--sidebar-text-muted);
+	--canvas: var(--sidebar-surface);
+	--surface: var(--sidebar-control);
+	--surface-raised: var(--sidebar-hover);
+	--surface-sunken: var(--sidebar-hover);
+	--border: var(--sidebar-border);
+	color: var(--text-primary);
+	background-color: var(--sidebar-surface);
+	background-image: var(--sidebar-glow);
+}
+
+/* Fondos en degradado: solo existen como roles, nunca como clases de paleta */
+@utility bg-nav-selected {
+	background-image: var(--nav-selected-bg);
+}
+
+@utility bg-nav-hover {
+	background-image: var(--nav-hover-bg);
+}
+
+@layer base {
+	body {
+		@apply bg-canvas font-sans text-sm/normal text-text-primary antialiased;
+	}
+
+	/* Mismo anillo de foco en todo el sistema; ningún componente lo quita */
+	:focus-visible {
+		outline: 2px solid var(--focus);
+		outline-offset: 2px;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		*,
+		*::before,
+		*::after {
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			transition-duration: 0.01ms !important;
+			scroll-behavior: auto !important;
+		}
+	}
+}

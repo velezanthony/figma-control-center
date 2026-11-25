@@ -1,0 +1,10 @@
+[
+	{
+		"name": "punto",
+		"svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path d=\"M0 0L4 4\"/></svg>"
+	},
+	{
+		"name": "cruz",
+		"svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path d=\"M4 4L20 20\"/><path d=\"M20 4L4 20\"/></svg>"
+	}
+]

@@ -1,0 +1,1520 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"type": "object",
+	"properties": {
+		"contract": {
+			"type": "string",
+			"const": "design-context@1"
+		},
+		"file": {
+			"type": "object",
+			"properties": {
+				"key": {
+					"type": "string"
+				},
+				"name": {
+					"type": "string"
+				}
+			},
+			"required": ["key", "name"],
+			"additionalProperties": false
+		},
+		"readAt": {
+			"type": "string",
+			"minLength": 1,
+			"description": "ISO 8601."
+		},
+		"root": {
+			"type": "string",
+			"minLength": 1,
+			"description": "Id de un nodo, de una variable o de un estilo."
+		},
+		"origin": {
+			"type": "object",
+			"properties": {
+				"kind": {
+					"type": "string",
+					"enum": ["area", "screen", "sheet", "compose"]
+				},
+				"key": {
+					"type": "string",
+					"minLength": 1
+				}
+			},
+			"required": ["kind", "key"],
+			"additionalProperties": false
+		},
+		"nodes": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string",
+						"minLength": 1,
+						"description": "Id de un nodo, de una variable o de un estilo."
+					},
+					"parent": {
+						"anyOf": [
+							{
+								"type": "string",
+								"minLength": 1,
+								"description": "Id de un nodo, de una variable o de un estilo."
+							},
+							{
+								"type": "null"
+							}
+						]
+					},
+					"name": {
+						"type": "string"
+					},
+					"type": {
+						"type": "string",
+						"minLength": 1
+					},
+					"visible": {
+						"type": "boolean"
+					},
+					"box": {
+						"type": "object",
+						"properties": {
+							"x": {
+								"type": "number"
+							},
+							"y": {
+								"type": "number"
+							},
+							"w": {
+								"type": "number"
+							},
+							"h": {
+								"type": "number"
+							}
+						},
+						"required": ["x", "y", "w", "h"],
+						"additionalProperties": false
+					},
+					"layout": {
+						"type": "object",
+						"properties": {
+							"mode": {
+								"type": "string",
+								"enum": ["HORIZONTAL", "VERTICAL", "GRID"]
+							},
+							"wrap": {
+								"type": "boolean"
+							},
+							"gap": {
+								"anyOf": [
+									{
+										"type": "object",
+										"properties": {
+											"raw": {
+												"anyOf": [
+													{
+														"type": "number"
+													},
+													{
+														"type": "string"
+													},
+													{
+														"type": "boolean"
+													},
+													{
+														"type": "array",
+														"items": {}
+													},
+													{
+														"type": "object",
+														"propertyNames": {
+															"type": "string"
+														},
+														"additionalProperties": {}
+													}
+												],
+												"description": "Un valor crudo de Figma: un número, un texto, un booleano o un objeto (una pintura, un efecto…)."
+											}
+										},
+										"required": ["raw"],
+										"additionalProperties": false
+									},
+									{
+										"type": "object",
+										"properties": {
+											"variable": {
+												"type": "string",
+												"minLength": 1,
+												"description": "Id de un nodo, de una variable o de un estilo."
+											}
+										},
+										"required": ["variable"],
+										"additionalProperties": false
+									},
+									{
+										"type": "object",
+										"properties": {
+											"style": {
+												"type": "string",
+												"minLength": 1,
+												"description": "Id de un nodo, de una variable o de un estilo."
+											}
+										},
+										"required": ["style"],
+										"additionalProperties": false
+									}
+								],
+								"description": "Suelto (`raw`: hay que mirarlo dos veces), una variable (por su id en `variables`) o un estilo (por su id en `styles`)."
+							},
+							"counterGap": {
+								"anyOf": [
+									{
+										"type": "object",
+										"properties": {
+											"raw": {
+												"anyOf": [
+													{
+														"type": "number"
+													},
+													{
+														"type": "string"
+													},
+													{
+														"type": "boolean"
+													},
+													{
+														"type": "array",
+														"items": {}
+													},
+													{
+														"type": "object",
+														"propertyNames": {
+															"type": "string"
+														},
+														"additionalProperties": {}
+													}
+												],
+												"description": "Un valor crudo de Figma: un número, un texto, un booleano o un objeto (una pintura, un efecto…)."
+											}
+										},
+										"required": ["raw"],
+										"additionalProperties": false
+									},
+									{
+										"type": "object",
+										"properties": {
+											"variable": {
+												"type": "string",
+												"minLength": 1,
+												"description": "Id de un nodo, de una variable o de un estilo."
+											}
+										},
+										"required": ["variable"],
+										"additionalProperties": false
+									},
+									{
+										"type": "object",
+										"properties": {
+											"style": {
+												"type": "string",
+												"minLength": 1,
+												"description": "Id de un nodo, de una variable o de un estilo."
+											}
+										},
+										"required": ["style"],
+										"additionalProperties": false
+									}
+								],
+								"description": "Suelto (`raw`: hay que mirarlo dos veces), una variable (por su id en `variables`) o un estilo (por su id en `styles`)."
+							},
+							"padding": {
+								"type": "array",
+								"prefixItems": [
+									{
+										"anyOf": [
+											{
+												"type": "object",
+												"properties": {
+													"raw": {
+														"anyOf": [
+															{
+																"type": "number"
+															},
+															{
+																"type": "string"
+															},
+															{
+																"type": "boolean"
+															},
+															{
+																"type": "array",
+																"items": {}
+															},
+															{
+																"type": "object",
+																"propertyNames": {
+																	"type": "string"
+																},
+																"additionalProperties": {}
+															}
+														],
+														"description": "Un valor crudo de Figma: un número, un texto, un booleano o un objeto (una pintura, un efecto…)."
+													}
+												},
+												"required": ["raw"],
+												"additionalProperties": false
+											},
+											{
+												"type": "object",
+												"properties": {
+													"variable": {
+														"type": "string",
+														"minLength": 1,
+														"description": "Id de un nodo, de una variable o de un estilo."
+													}
+												},
+												"required": ["variable"],
+												"additionalProperties": false
+											},
+											{
+												"type": "object",
+												"properties": {
+													"style": {
+														"type": "string",
+														"minLength": 1,
+														"description": "Id de un nodo, de una variable o de un estilo."
+													}
+												},
+												"required": ["style"],
+												"additionalProperties": false
+											}
+										],
+										"description": "Suelto (`raw`: hay que mirarlo dos veces), una variable (por su id en `variables`) o un estilo (por su id en `styles`)."
+									},
+									{
+										"anyOf": [
+											{
+												"type": "object",
+												"properties": {
+													"raw": {
+														"anyOf": [
+															{
+																"type": "number"
+															},
+															{
+																"type": "string"
+															},
+															{
+																"type": "boolean"
+															},
+															{
+																"type": "array",
+																"items": {}
+															},
+															{
+																"type": "object",
+																"propertyNames": {
+																	"type": "string"
+																},
+																"additionalProperties": {}
+															}
+														],
+														"description": "Un valor crudo de Figma: un número, un texto, un booleano o un objeto (una pintura, un efecto…)."
+													}
+												},
+												"required": ["raw"],
+												"additionalProperties": false
+											},
+											{
+												"type": "object",
+												"properties": {
+													"variable": {
+														"type": "string",
+														"minLength": 1,
+														"description": "Id de un nodo, de una variable o de un estilo."
+													}
+												},
+												"required": ["variable"],
+												"additionalProperties": false
+											},
+											{
+												"type": "object",
+												"properties": {
+													"style": {
+														"type": "string",
+														"minLength": 1,
+														"description": "Id de un nodo, de una variable o de un estilo."
+													}
+												},
+												"required": ["style"],
+												"additionalProperties": false
+											}
+										],
+										"description": "Suelto (`raw`: hay que mirarlo dos veces), una variable (por su id en `variables`) o un estilo (por su id en `styles`)."
+									},
+									{
+										"anyOf": [
+											{
+												"type": "object",
+												"properties": {
+													"raw": {
+														"anyOf": [
+															{
+																"type": "number"
+															},
+															{
+																"type": "string"
+															},
+															{
+																"type": "boolean"
+															},
+															{
+																"type": "array",
+																"items": {}
+															},
+															{
+																"type": "object",
+																"propertyNames": {
+																	"type": "string"
+																},
+																"additionalProperties": {}
+															}
+														],
+														"description": "Un valor crudo de Figma: un número, un texto, un booleano o un objeto (una pintura, un efecto…)."
+													}
+												},
+												"required": ["raw"],
+												"additionalProperties": false
+											},
+											{
+												"type": "object",
+												"properties": {
+													"variable": {
+														"type": "string",
+														"minLength": 1,
+														"description": "Id de un nodo, de una variable o de un estilo."
+													}
+												},
+												"required": ["variable"],
+												"additionalProperties": false
+											},
+											{
+												"type": "object",
+												"properties": {
+													"style": {
+														"type": "string",
+														"minLength": 1,
+														"description": "Id de un nodo, de una variable o de un estilo."
+													}
+												},
+												"required": ["style"],
+												"additionalProperties": false
+											}
+										],
+										"description": "Suelto (`raw`: hay que mirarlo dos veces), una variable (por su id en `variables`) o un estilo (por su id en `styles`)."
+									},
+									{
+										"anyOf": [
+											{
+												"type": "object",
+												"properties": {
+													"raw": {
+														"anyOf": [
+															{
+																"type": "number"
+															},
+															{
+																"type": "string"
+															},
+															{
+																"type": "boolean"
+															},
+															{
+																"type": "array",
+																"items": {}
+															},
+															{
+																"type": "object",
+																"propertyNames": {
+																	"type": "string"
+																},
+																"additionalProperties": {}
+															}
+														],
+														"description": "Un valor crudo de Figma: un número, un texto, un booleano o un objeto (una pintura, un efecto…)."
+													}
+												},
+												"required": ["raw"],
+												"additionalProperties": false
+											},
+											{
+												"type": "object",
+												"properties": {
+													"variable": {
+														"type": "string",
+														"minLength": 1,
+														"description": "Id de un nodo, de una variable o de un estilo."
+													}
+												},
+												"required": ["variable"],
+												"additionalProperties": false
+											},
+											{
+												"type": "object",
+												"properties": {
+													"style": {
+														"type": "string",
+														"minLength": 1,
+														"description": "Id de un nodo, de una variable o de un estilo."
+													}
+												},
+												"required": ["style"],
+												"additionalProperties": false
+											}
+										],
+										"description": "Suelto (`raw`: hay que mirarlo dos veces), una variable (por su id en `variables`) o un estilo (por su id en `styles`)."
+									}
+								],
+								"items": false,
+								"minItems": 4,
+								"maxItems": 4
+							},
+							"primaryAlign": {
+								"type": "string",
+								"minLength": 1
+							},
+							"counterAlign": {
+								"type": "string",
+								"minLength": 1
+							}
+						},
+						"required": [
+							"mode",
+							"wrap",
+							"gap",
+							"padding",
+							"primaryAlign",
+							"counterAlign"
+						],
+						"additionalProperties": false
+					},
+					"placement": {
+						"type": "object",
+						"properties": {
+							"sizing": {
+								"type": "object",
+								"properties": {
+									"h": {
+										"type": "string",
+										"enum": ["FIXED", "HUG", "FILL"]
+									},
+									"v": {
+										"type": "string",
+										"enum": ["FIXED", "HUG", "FILL"]
+									}
+								},
+								"required": ["h", "v"],
+								"additionalProperties": false
+							},
+							"positioning": {
+								"type": "string",
+								"const": "ABSOLUTE"
+							},
+							"min": {
+								"type": "object",
+								"properties": {
+									"w": {
+										"type": "number"
+									},
+									"h": {
+										"type": "number"
+									}
+								},
+								"additionalProperties": false
+							},
+							"max": {
+								"type": "object",
+								"properties": {
+									"w": {
+										"type": "number"
+									},
+									"h": {
+										"type": "number"
+									}
+								},
+								"additionalProperties": false
+							}
+						},
+						"required": ["sizing"],
+						"additionalProperties": false
+					},
+					"fills": {
+						"type": "array",
+						"items": {
+							"anyOf": [
+								{
+									"type": "object",
+									"properties": {
+										"raw": {
+											"anyOf": [
+												{
+													"type": "number"
+												},
+												{
+													"type": "string"
+												},
+												{
+													"type": "boolean"
+												},
+												{
+													"type": "array",
+													"items": {}
+												},
+												{
+													"type": "object",
+													"propertyNames": {
+														"type": "string"
+													},
+													"additionalProperties": {}
+												}
+											],
+											"description": "Un valor crudo de Figma: un número, un texto, un booleano o un objeto (una pintura, un efecto…)."
+										}
+									},
+									"required": ["raw"],
+									"additionalProperties": false
+								},
+								{
+									"type": "object",
+									"properties": {
+										"variable": {
+											"type": "string",
+											"minLength": 1,
+											"description": "Id de un nodo, de una variable o de un estilo."
+										}
+									},
+									"required": ["variable"],
+									"additionalProperties": false
+								},
+								{
+									"type": "object",
+									"properties": {
+										"style": {
+											"type": "string",
+											"minLength": 1,
+											"description": "Id de un nodo, de una variable o de un estilo."
+										}
+									},
+									"required": ["style"],
+									"additionalProperties": false
+								}
+							],
+							"description": "Suelto (`raw`: hay que mirarlo dos veces), una variable (por su id en `variables`) o un estilo (por su id en `styles`)."
+						}
+					},
+					"strokes": {
+						"type": "array",
+						"items": {
+							"anyOf": [
+								{
+									"type": "object",
+									"properties": {
+										"raw": {
+											"anyOf": [
+												{
+													"type": "number"
+												},
+												{
+													"type": "string"
+												},
+												{
+													"type": "boolean"
+												},
+												{
+													"type": "array",
+													"items": {}
+												},
+												{
+													"type": "object",
+													"propertyNames": {
+														"type": "string"
+													},
+													"additionalProperties": {}
+												}
+											],
+											"description": "Un valor crudo de Figma: un número, un texto, un booleano o un objeto (una pintura, un efecto…)."
+										}
+									},
+									"required": ["raw"],
+									"additionalProperties": false
+								},
+								{
+									"type": "object",
+									"properties": {
+										"variable": {
+											"type": "string",
+											"minLength": 1,
+											"description": "Id de un nodo, de una variable o de un estilo."
+										}
+									},
+									"required": ["variable"],
+									"additionalProperties": false
+								},
+								{
+									"type": "object",
+									"properties": {
+										"style": {
+											"type": "string",
+											"minLength": 1,
+											"description": "Id de un nodo, de una variable o de un estilo."
+										}
+									},
+									"required": ["style"],
+									"additionalProperties": false
+								}
+							],
+							"description": "Suelto (`raw`: hay que mirarlo dos veces), una variable (por su id en `variables`) o un estilo (por su id en `styles`)."
+						}
+					},
+					"strokeWeight": {
+						"anyOf": [
+							{
+								"type": "object",
+								"properties": {
+									"raw": {
+										"anyOf": [
+											{
+												"type": "number"
+											},
+											{
+												"type": "string"
+											},
+											{
+												"type": "boolean"
+											},
+											{
+												"type": "array",
+												"items": {}
+											},
+											{
+												"type": "object",
+												"propertyNames": {
+													"type": "string"
+												},
+												"additionalProperties": {}
+											}
+										],
+										"description": "Un valor crudo de Figma: un número, un texto, un booleano o un objeto (una pintura, un efecto…)."
+									}
+								},
+								"required": ["raw"],
+								"additionalProperties": false
+							},
+							{
+								"type": "object",
+								"properties": {
+									"variable": {
+										"type": "string",
+										"minLength": 1,
+										"description": "Id de un nodo, de una variable o de un estilo."
+									}
+								},
+								"required": ["variable"],
+								"additionalProperties": false
+							},
+							{
+								"type": "object",
+								"properties": {
+									"style": {
+										"type": "string",
+										"minLength": 1,
+										"description": "Id de un nodo, de una variable o de un estilo."
+									}
+								},
+								"required": ["style"],
+								"additionalProperties": false
+							}
+						],
+						"description": "Suelto (`raw`: hay que mirarlo dos veces), una variable (por su id en `variables`) o un estilo (por su id en `styles`)."
+					},
+					"effects": {
+						"type": "array",
+						"items": {
+							"anyOf": [
+								{
+									"type": "object",
+									"properties": {
+										"raw": {
+											"anyOf": [
+												{
+													"type": "number"
+												},
+												{
+													"type": "string"
+												},
+												{
+													"type": "boolean"
+												},
+												{
+													"type": "array",
+													"items": {}
+												},
+												{
+													"type": "object",
+													"propertyNames": {
+														"type": "string"
+													},
+													"additionalProperties": {}
+												}
+											],
+											"description": "Un valor crudo de Figma: un número, un texto, un booleano o un objeto (una pintura, un efecto…)."
+										}
+									},
+									"required": ["raw"],
+									"additionalProperties": false
+								},
+								{
+									"type": "object",
+									"properties": {
+										"variable": {
+											"type": "string",
+											"minLength": 1,
+											"description": "Id de un nodo, de una variable o de un estilo."
+										}
+									},
+									"required": ["variable"],
+									"additionalProperties": false
+								},
+								{
+									"type": "object",
+									"properties": {
+										"style": {
+											"type": "string",
+											"minLength": 1,
+											"description": "Id de un nodo, de una variable o de un estilo."
+										}
+									},
+									"required": ["style"],
+									"additionalProperties": false
+								}
+							],
+							"description": "Suelto (`raw`: hay que mirarlo dos veces), una variable (por su id en `variables`) o un estilo (por su id en `styles`)."
+						}
+					},
+					"radius": {
+						"type": "object",
+						"properties": {
+							"tl": {
+								"anyOf": [
+									{
+										"type": "object",
+										"properties": {
+											"raw": {
+												"anyOf": [
+													{
+														"type": "number"
+													},
+													{
+														"type": "string"
+													},
+													{
+														"type": "boolean"
+													},
+													{
+														"type": "array",
+														"items": {}
+													},
+													{
+														"type": "object",
+														"propertyNames": {
+															"type": "string"
+														},
+														"additionalProperties": {}
+													}
+												],
+												"description": "Un valor crudo de Figma: un número, un texto, un booleano o un objeto (una pintura, un efecto…)."
+											}
+										},
+										"required": ["raw"],
+										"additionalProperties": false
+									},
+									{
+										"type": "object",
+										"properties": {
+											"variable": {
+												"type": "string",
+												"minLength": 1,
+												"description": "Id de un nodo, de una variable o de un estilo."
+											}
+										},
+										"required": ["variable"],
+										"additionalProperties": false
+									},
+									{
+										"type": "object",
+										"properties": {
+											"style": {
+												"type": "string",
+												"minLength": 1,
+												"description": "Id de un nodo, de una variable o de un estilo."
+											}
+										},
+										"required": ["style"],
+										"additionalProperties": false
+									}
+								],
+								"description": "Suelto (`raw`: hay que mirarlo dos veces), una variable (por su id en `variables`) o un estilo (por su id en `styles`)."
+							},
+							"tr": {
+								"anyOf": [
+									{
+										"type": "object",
+										"properties": {
+											"raw": {
+												"anyOf": [
+													{
+														"type": "number"
+													},
+													{
+														"type": "string"
+													},
+													{
+														"type": "boolean"
+													},
+													{
+														"type": "array",
+														"items": {}
+													},
+													{
+														"type": "object",
+														"propertyNames": {
+															"type": "string"
+														},
+														"additionalProperties": {}
+													}
+												],
+												"description": "Un valor crudo de Figma: un número, un texto, un booleano o un objeto (una pintura, un efecto…)."
+											}
+										},
+										"required": ["raw"],
+										"additionalProperties": false
+									},
+									{
+										"type": "object",
+										"properties": {
+											"variable": {
+												"type": "string",
+												"minLength": 1,
+												"description": "Id de un nodo, de una variable o de un estilo."
+											}
+										},
+										"required": ["variable"],
+										"additionalProperties": false
+									},
+									{
+										"type": "object",
+										"properties": {
+											"style": {
+												"type": "string",
+												"minLength": 1,
+												"description": "Id de un nodo, de una variable o de un estilo."
+											}
+										},
+										"required": ["style"],
+										"additionalProperties": false
+									}
+								],
+								"description": "Suelto (`raw`: hay que mirarlo dos veces), una variable (por su id en `variables`) o un estilo (por su id en `styles`)."
+							},
+							"br": {
+								"anyOf": [
+									{
+										"type": "object",
+										"properties": {
+											"raw": {
+												"anyOf": [
+													{
+														"type": "number"
+													},
+													{
+														"type": "string"
+													},
+													{
+														"type": "boolean"
+													},
+													{
+														"type": "array",
+														"items": {}
+													},
+													{
+														"type": "object",
+														"propertyNames": {
+															"type": "string"
+														},
+														"additionalProperties": {}
+													}
+												],
+												"description": "Un valor crudo de Figma: un número, un texto, un booleano o un objeto (una pintura, un efecto…)."
+											}
+										},
+										"required": ["raw"],
+										"additionalProperties": false
+									},
+									{
+										"type": "object",
+										"properties": {
+											"variable": {
+												"type": "string",
+												"minLength": 1,
+												"description": "Id de un nodo, de una variable o de un estilo."
+											}
+										},
+										"required": ["variable"],
+										"additionalProperties": false
+									},
+									{
+										"type": "object",
+										"properties": {
+											"style": {
+												"type": "string",
+												"minLength": 1,
+												"description": "Id de un nodo, de una variable o de un estilo."
+											}
+										},
+										"required": ["style"],
+										"additionalProperties": false
+									}
+								],
+								"description": "Suelto (`raw`: hay que mirarlo dos veces), una variable (por su id en `variables`) o un estilo (por su id en `styles`)."
+							},
+							"bl": {
+								"anyOf": [
+									{
+										"type": "object",
+										"properties": {
+											"raw": {
+												"anyOf": [
+													{
+														"type": "number"
+													},
+													{
+														"type": "string"
+													},
+													{
+														"type": "boolean"
+													},
+													{
+														"type": "array",
+														"items": {}
+													},
+													{
+														"type": "object",
+														"propertyNames": {
+															"type": "string"
+														},
+														"additionalProperties": {}
+													}
+												],
+												"description": "Un valor crudo de Figma: un número, un texto, un booleano o un objeto (una pintura, un efecto…)."
+											}
+										},
+										"required": ["raw"],
+										"additionalProperties": false
+									},
+									{
+										"type": "object",
+										"properties": {
+											"variable": {
+												"type": "string",
+												"minLength": 1,
+												"description": "Id de un nodo, de una variable o de un estilo."
+											}
+										},
+										"required": ["variable"],
+										"additionalProperties": false
+									},
+									{
+										"type": "object",
+										"properties": {
+											"style": {
+												"type": "string",
+												"minLength": 1,
+												"description": "Id de un nodo, de una variable o de un estilo."
+											}
+										},
+										"required": ["style"],
+										"additionalProperties": false
+									}
+								],
+								"description": "Suelto (`raw`: hay que mirarlo dos veces), una variable (por su id en `variables`) o un estilo (por su id en `styles`)."
+							}
+						},
+						"required": ["tl", "tr", "br", "bl"],
+						"additionalProperties": false
+					},
+					"opacity": {
+						"type": "number"
+					},
+					"text": {
+						"type": "object",
+						"properties": {
+							"characters": {
+								"type": "string"
+							},
+							"font": {
+								"type": "object",
+								"properties": {
+									"family": {
+										"type": "string"
+									},
+									"style": {
+										"type": "string"
+									},
+									"size": {
+										"type": "number"
+									},
+									"lineHeight": {
+										"type": "object",
+										"properties": {
+											"unit": {
+												"type": "string",
+												"minLength": 1
+											},
+											"value": {
+												"type": "number"
+											}
+										},
+										"required": ["unit"],
+										"additionalProperties": false
+									},
+									"letterSpacing": {
+										"type": "object",
+										"properties": {
+											"unit": {
+												"type": "string",
+												"minLength": 1
+											},
+											"value": {
+												"type": "number"
+											}
+										},
+										"required": ["unit"],
+										"additionalProperties": false
+									}
+								},
+								"required": [
+									"family",
+									"style",
+									"size",
+									"lineHeight",
+									"letterSpacing"
+								],
+								"additionalProperties": false
+							},
+							"style": {
+								"type": "string",
+								"minLength": 1,
+								"description": "Id de un nodo, de una variable o de un estilo."
+							},
+							"segments": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"start": {
+											"type": "number"
+										},
+										"end": {
+											"type": "number"
+										},
+										"font": {
+											"type": "object",
+											"properties": {
+												"family": {
+													"type": "string"
+												},
+												"style": {
+													"type": "string"
+												},
+												"size": {
+													"type": "number"
+												},
+												"lineHeight": {
+													"type": "object",
+													"properties": {
+														"unit": {
+															"type": "string",
+															"minLength": 1
+														},
+														"value": {
+															"type": "number"
+														}
+													},
+													"required": ["unit"],
+													"additionalProperties": false
+												},
+												"letterSpacing": {
+													"type": "object",
+													"properties": {
+														"unit": {
+															"type": "string",
+															"minLength": 1
+														},
+														"value": {
+															"type": "number"
+														}
+													},
+													"required": ["unit"],
+													"additionalProperties": false
+												}
+											},
+											"required": [
+												"family",
+												"style",
+												"size",
+												"lineHeight",
+												"letterSpacing"
+											],
+											"additionalProperties": false
+										}
+									},
+									"required": ["start", "end", "font"],
+									"additionalProperties": false
+								}
+							}
+						},
+						"required": ["characters", "font"],
+						"additionalProperties": false
+					},
+					"instance": {
+						"type": "object",
+						"properties": {
+							"component": {
+								"type": "string",
+								"minLength": 1
+							},
+							"variant": {
+								"type": "object",
+								"propertyNames": {
+									"type": "string"
+								},
+								"additionalProperties": {
+									"type": "string"
+								}
+							},
+							"props": {
+								"type": "object",
+								"propertyNames": {
+									"type": "string"
+								},
+								"additionalProperties": {
+									"type": ["string", "boolean"]
+								}
+							},
+							"overridden": {
+								"type": "array",
+								"items": {
+									"type": "string"
+								}
+							}
+						},
+						"required": ["component", "variant", "props", "overridden"],
+						"additionalProperties": false
+					},
+					"matched": {
+						"type": "object",
+						"properties": {
+							"by": {
+								"type": "string",
+								"minLength": 1
+							}
+						},
+						"required": ["by"],
+						"additionalProperties": false
+					},
+					"hints": {
+						"type": "object",
+						"properties": {
+							"classes": {
+								"type": "array",
+								"items": {
+									"type": "string",
+									"minLength": 1
+								}
+							},
+							"unmapped": {
+								"type": "array",
+								"items": {
+									"type": "string",
+									"minLength": 1
+								}
+							}
+						},
+						"required": ["classes", "unmapped"],
+						"additionalProperties": false
+					}
+				},
+				"required": ["id", "parent", "name", "type", "visible", "box"],
+				"additionalProperties": false
+			},
+			"description": "En anchura: el padre siempre antes que sus hijos."
+		},
+		"variables": {
+			"type": "object",
+			"propertyNames": {
+				"type": "string"
+			},
+			"additionalProperties": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string",
+						"minLength": 1
+					},
+					"collection": {
+						"type": "string"
+					},
+					"type": {
+						"type": "string",
+						"minLength": 1
+					},
+					"value": {
+						"anyOf": [
+							{
+								"type": "number"
+							},
+							{
+								"type": "string"
+							},
+							{
+								"type": "boolean"
+							},
+							{
+								"type": "array",
+								"items": {}
+							},
+							{
+								"type": "object",
+								"propertyNames": {
+									"type": "string"
+								},
+								"additionalProperties": {}
+							}
+						],
+						"description": "Un valor crudo de Figma: un número, un texto, un booleano o un objeto (una pintura, un efecto…)."
+					},
+					"aliasOf": {
+						"type": "array",
+						"items": {
+							"type": "string",
+							"minLength": 1
+						}
+					},
+					"codeClass": {
+						"type": "string",
+						"minLength": 1
+					}
+				},
+				"required": ["name", "collection", "type", "value"],
+				"additionalProperties": false
+			}
+		},
+		"styles": {
+			"type": "object",
+			"propertyNames": {
+				"type": "string"
+			},
+			"additionalProperties": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string",
+						"minLength": 1
+					},
+					"kind": {
+						"type": "string",
+						"enum": ["paint", "text", "effect", "grid"]
+					},
+					"key": {
+						"type": "string"
+					},
+					"value": {
+						"anyOf": [
+							{
+								"type": "number"
+							},
+							{
+								"type": "string"
+							},
+							{
+								"type": "boolean"
+							},
+							{
+								"type": "array",
+								"items": {}
+							},
+							{
+								"type": "object",
+								"propertyNames": {
+									"type": "string"
+								},
+								"additionalProperties": {}
+							}
+						],
+						"description": "Un valor crudo de Figma: un número, un texto, un booleano o un objeto (una pintura, un efecto…)."
+					}
+				},
+				"required": ["name", "kind", "key", "value"],
+				"additionalProperties": false
+			}
+		},
+		"components": {
+			"type": "object",
+			"propertyNames": {
+				"type": "string"
+			},
+			"additionalProperties": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string",
+						"minLength": 1
+					},
+					"kind": {
+						"type": "string",
+						"enum": ["COMPONENT_SET", "COMPONENT"]
+					},
+					"key": {
+						"type": "string"
+					},
+					"remote": {
+						"type": "boolean"
+					},
+					"library": {
+						"type": "string",
+						"minLength": 1
+					},
+					"variants": {
+						"type": "object",
+						"propertyNames": {
+							"type": "string"
+						},
+						"additionalProperties": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						}
+					},
+					"properties": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"name": {
+									"type": "string",
+									"minLength": 1
+								},
+								"type": {
+									"type": "string",
+									"minLength": 1
+								},
+								"default": {
+									"type": ["string", "boolean", "null"]
+								}
+							},
+							"required": ["name", "type", "default"],
+							"additionalProperties": false
+						}
+					},
+					"sheet": {
+						"type": "string",
+						"minLength": 1
+					},
+					"code": {
+						"type": "object",
+						"properties": {
+							"source": {
+								"type": "string",
+								"minLength": 1,
+								"description": "Ruta de la plantilla (`source` de la hoja)."
+							},
+							"tag": {
+								"type": "string",
+								"minLength": 1
+							},
+							"by": {
+								"type": "string",
+								"enum": ["key", "name"],
+								"description": "`key`: el set lleva `fcc:sheet:<clave>`. `name`: la hoja se encontró por el nombre del set (R-1)."
+							}
+						},
+						"required": ["source", "by"],
+						"additionalProperties": false
+					},
+					"candidates": {
+						"type": "array",
+						"items": {
+							"type": "string",
+							"minLength": 1
+						}
+					}
+				},
+				"required": ["name", "kind", "key", "remote", "variants", "properties"],
+				"additionalProperties": false
+			}
+		},
+		"truncated": {
+			"type": "object",
+			"properties": {
+				"reason": {
+					"type": "string",
+					"const": "max-nodes"
+				},
+				"children": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"minLength": 1,
+						"description": "Id de un nodo, de una variable o de un estilo."
+					}
+				}
+			},
+			"required": ["reason", "children"],
+			"additionalProperties": false
+		},
+		"warnings": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"code": {
+						"type": "string",
+						"enum": ["NO_CODE_MAPPING", "SCREENSHOT_FAILED"]
+					},
+					"message": {
+						"type": "string",
+						"minLength": 1
+					},
+					"component": {
+						"type": "string",
+						"minLength": 1
+					}
+				},
+				"required": ["code", "message"],
+				"additionalProperties": false
+			}
+		}
+	},
+	"required": [
+		"contract",
+		"file",
+		"readAt",
+		"root",
+		"nodes",
+		"variables",
+		"styles",
+		"components"
+	],
+	"additionalProperties": false
+}

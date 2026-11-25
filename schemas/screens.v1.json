@@ -1,0 +1,171 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"type": "object",
+	"properties": {
+		"contract": {
+			"type": "string",
+			"const": "screens@1"
+		},
+		"screens": {
+			"minItems": 1,
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"key": {
+						"type": "string",
+						"pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+					},
+					"title": {
+						"type": "string",
+						"minLength": 1
+					},
+					"url": {
+						"type": "string",
+						"pattern": "^\\/(?!\\/)"
+					},
+					"session": {
+						"type": "string",
+						"minLength": 1
+					},
+					"pick": {
+						"type": "string",
+						"minLength": 1
+					},
+					"until": {
+						"type": "string",
+						"minLength": 1
+					},
+					"viewport": {
+						"description": "Tamaño de la pestaña solo para esta pantalla; sin él, el de project@1.",
+						"type": "object",
+						"properties": {
+							"w": {
+								"type": "integer",
+								"exclusiveMinimum": 0,
+								"maximum": 9007199254740991
+							},
+							"h": {
+								"type": "integer",
+								"exclusiveMinimum": 0,
+								"maximum": 9007199254740991
+							}
+						},
+						"required": ["w", "h"],
+						"additionalProperties": false
+					},
+					"variants": {
+						"minItems": 1,
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"props": {
+									"type": "object",
+									"propertyNames": {
+										"type": "string"
+									},
+									"additionalProperties": {
+										"type": "string"
+									}
+								},
+								"query": {
+									"description": "Pares que se añaden a la url de la pantalla, en el orden escrito (urlencode).",
+									"type": "object",
+									"propertyNames": {
+										"type": "string",
+										"minLength": 1
+									},
+									"additionalProperties": {
+										"type": "string"
+									}
+								},
+								"run": {
+									"type": "array",
+									"items": {
+										"anyOf": [
+											{
+												"type": "object",
+												"properties": {
+													"click": {
+														"type": "string",
+														"minLength": 1,
+														"description": "Selector: clic en el mundo aislado."
+													}
+												},
+												"required": ["click"],
+												"additionalProperties": false
+											},
+											{
+												"type": "object",
+												"properties": {
+													"evaluateInPage": {
+														"type": "string",
+														"minLength": 1,
+														"description": "Expresión en el mundo de la página: pide allowPageWorld (D-2)."
+													}
+												},
+												"required": ["evaluateInPage"],
+												"additionalProperties": false
+											}
+										]
+									}
+								},
+								"until": {
+									"description": "Se sondea en el mundo aislado hasta que es verdadera.",
+									"type": "string",
+									"minLength": 1
+								},
+								"viewport": {
+									"description": "Tamaño de la pestaña solo para esta variante; sin él, el de la pantalla o el de project@1.",
+									"type": "object",
+									"properties": {
+										"w": {
+											"type": "integer",
+											"exclusiveMinimum": 0,
+											"maximum": 9007199254740991
+										},
+										"h": {
+											"type": "integer",
+											"exclusiveMinimum": 0,
+											"maximum": 9007199254740991
+										}
+									},
+									"required": ["w", "h"],
+									"additionalProperties": false
+								},
+								"force": {
+									"description": "Pseudoclases que se fuerzan (CSS.forcePseudoState) tras las acciones y el `until` y antes de medir, y se quitan al acabar la variante. Un selector que no existe es WebPageError.",
+									"minItems": 1,
+									"type": "array",
+									"items": {
+										"type": "object",
+										"properties": {
+											"selector": {
+												"type": "string",
+												"minLength": 1,
+												"description": "El primer elemento que casa en el documento principal."
+											},
+											"state": {
+												"type": "string",
+												"enum": ["hover", "focus", "focus-visible", "active"]
+											}
+										},
+										"required": ["selector", "state"],
+										"additionalProperties": false
+									}
+								}
+							},
+							"required": ["props"],
+							"additionalProperties": false
+						}
+					}
+				},
+				"required": ["key", "title", "url"],
+				"additionalProperties": false
+			}
+		}
+	},
+	"required": ["contract", "screens"],
+	"additionalProperties": false
+}

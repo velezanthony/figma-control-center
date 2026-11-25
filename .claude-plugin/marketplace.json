@@ -1,0 +1,20 @@
+{
+	"name": "figma-control-center",
+	"owner": {
+		"name": "Anthony Velez Tapia"
+	},
+	"metadata": {
+		"description": "Claude Code plugins for Figma Control Center, the local MCP server that reads and edits Figma files."
+	},
+	"plugins": [
+		{
+			"name": "figma-control-center",
+			"source": "./plugin",
+			"description": "Agent skills for Figma Control Center: the web-to-Figma and Figma-to-code workflow with the figma_* tools, and design criteria for components, tokens, states and review.",
+			"homepage": "https://github.com/velezanthony/figma-control-center",
+			"repository": "https://github.com/velezanthony/figma-control-center",
+			"license": "MIT",
+			"category": "design"
+		}
+	]
+}

@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Espera</title>
+<style>
+body { margin: 0; font-family: sans-serif; }
+#animado { width: 10px; height: 10px; transition: width 5s; }
+</style>
+</head>
+<body><div id="zona"><img id="lenta" src="/lento/400/dot.svg" width="40" height="20" alt=""><p class="quitar">fuera por strip</p><p class="ignorada">fuera por ignore</p><p>se queda</p></div><div id="animado"></div>
+<script>
+setTimeout(() => {
+	const p = document.createElement("p");
+	p.id = "tarde";
+	p.textContent = "llega tarde";
+	document.getElementById("zona").appendChild(p);
+}, 300);
+</script>
+</body>
+</html>

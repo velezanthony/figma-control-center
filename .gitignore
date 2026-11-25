@@ -1,0 +1,11 @@
+node_modules/
+_local/
+.env
+output/
+scripts/.generated/
+web/dist/
+*.db
+*.db-wal
+*.db-shm
+playwright-report/
+test-results/

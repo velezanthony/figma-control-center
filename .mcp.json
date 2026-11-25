@@ -1,0 +1,9 @@
+{
+	"mcpServers": {
+		"figma-control-center": {
+			"type": "stdio",
+			"command": "node",
+			"args": ["${CLAUDE_PROJECT_DIR:-.}/server/src/main.ts"]
+		}
+	}
+}

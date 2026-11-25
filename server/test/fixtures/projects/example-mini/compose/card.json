@@ -1,0 +1,21 @@
+{
+	"contract": "compose@1",
+	"key": "card",
+	"title": "Ficha de ejemplo",
+	"target": { "page": "Pruebas", "width": 480 },
+	"root": {
+		"stack": "VERTICAL",
+		"gap": "espacio/m",
+		"padding": "espacio/m",
+		"fill": "color/fondo",
+		"children": [
+			{ "text": "Hola", "style": "Título/L", "color": "gris/900" },
+			{
+				"use": "marca",
+				"variant": { "tamano": "sm" },
+				"props": { "etiqueta": "Marca de ejemplo" },
+				"name": "Marca"
+			}
+		]
+	}
+}

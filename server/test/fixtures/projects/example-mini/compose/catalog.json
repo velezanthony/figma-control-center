@@ -1,0 +1,14 @@
+{
+	"contract": "compose@1",
+	"key": "catalog",
+	"title": "Ficha con piezas que no hay",
+	"target": { "page": "Pruebas", "width": 480 },
+	"root": {
+		"stack": "VERTICAL",
+		"gap": "espacio/xl",
+		"children": [
+			{ "text": "Hola", "style": "Nada", "color": "gris/900" },
+			{ "use": "marca", "variant": { "tamano": "xl" } }
+		]
+	}
+}

@@ -1,0 +1,98 @@
+{
+	"name": "figma-control-center",
+	"version": "0.1.0",
+	"description": "A local MCP server that lets Claude Code read and edit Figma files by running Plugin API scripts from disk, over Chrome DevTools Protocol.",
+	"keywords": [
+		"mcp",
+		"model-context-protocol",
+		"claude-code",
+		"figma",
+		"figma-plugin-api",
+		"design-system",
+		"chrome-devtools-protocol"
+	],
+	"homepage": "https://velezanthony.github.io/figma-control-center/",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/velezanthony/figma-control-center.git"
+	},
+	"bugs": {
+		"url": "https://github.com/velezanthony/figma-control-center/issues"
+	},
+	"scripts": {
+		"server": "node server/src/main.ts",
+		"dashboard": "node server/src/dashboard.ts",
+		"build:web": "vite build --config web/vite.config.ts",
+		"dev:web": "vite --config web/vite.config.ts",
+		"build:kit": "node server/test/kits/build.ts",
+		"typecheck": "tsc -p server && tsc -p server/src/domain && tsc -p kits && tsc -p kits/figma && tsc -p web/tsconfig.node.json && svelte-check --workspace web --tsconfig ./tsconfig.json",
+		"test": "npm run test:server && npm run test:web",
+		"test:server": "node --test \"server/src/**/*.test.ts\" \"server/test/*.test.ts\" \"server/test/contracts/*.test.ts\" \"server/test/support/*.test.ts\" \"server/test/harness/*.test.ts\" \"server/test/fixtures/scenarios/*.test.ts\" \"server/test/kits/*/pure/*.test.ts\"",
+		"test:web": "vitest run --config web/vite.config.ts",
+		"lint": "biome check && eslint && depcruise server/src --config .dependency-cruiser.mjs",
+		"test:watch": "node --test --watch \"server/src/**/*.test.ts\" \"server/test/*.test.ts\" \"server/test/contracts/*.test.ts\" \"server/test/support/*.test.ts\" \"server/test/harness/*.test.ts\" \"server/test/fixtures/scenarios/*.test.ts\" \"server/test/kits/*/pure/*.test.ts\"",
+		"test:web:watch": "vitest --config web/vite.config.ts",
+		"test:coverage": "node --test --experimental-test-coverage \"server/src/**/*.test.ts\" \"server/test/*.test.ts\" \"server/test/contracts/*.test.ts\" \"server/test/support/*.test.ts\" \"server/test/harness/*.test.ts\" \"server/test/fixtures/scenarios/*.test.ts\" \"server/test/kits/*/pure/*.test.ts\" && vitest run --config web/vite.config.ts --coverage",
+		"test:e2e:browser": "playwright test",
+		"test:contract": "FCC_E2E=1 node --test server/test/contract/figma-contract.e2e.test.ts",
+		"test:kit-contract": "FCC_E2E=1 node --test server/test/contract/figma-kit.e2e.test.ts",
+		"test:e2e": "node --test --test-concurrency=2 \"server/test/e2e/scenarios/*.e2e.test.ts\" \"server/test/e2e/web/*.e2e.test.ts\"",
+		"test:kits": "node --test \"server/test/kits/*/*.e2e.test.ts\"",
+		"schemas": "node server/test/contracts/write-schemas.ts",
+		"db:generate": "drizzle-kit generate --config server/drizzle.config.ts"
+	},
+	"author": "Anthony Velez Tapia",
+	"license": "MIT",
+	"type": "module",
+	"engines": {
+		"node": ">=24"
+	},
+	"dependencies": {
+		"@modelcontextprotocol/sdk": "^1.32.2",
+		"better-sqlite3": "13.0.3",
+		"drizzle-orm": "0.45.4",
+		"ws": "^8.22.1",
+		"zod": "^4.6.7"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.6.6",
+		"@figma/plugin-typings": "^1.142.0",
+		"@playwright/test": "^1.65.0",
+		"@sveltejs/vite-plugin-svelte": "7.3.1",
+		"@tailwindcss/vite": "4.3.5",
+		"@testing-library/svelte": "5.4.2",
+		"@tsconfig/node24": "^24.0.5",
+		"@tsconfig/strictest": "^2.0.8",
+		"@types/better-sqlite3": "9.6.0",
+		"@types/node": "^26.6.6",
+		"@types/pngjs": "^6.0.5",
+		"@types/ws": "^8.18.2",
+		"@vitest/coverage-v8": "5.1.0",
+		"dependency-cruiser": "18.7.2",
+		"drizzle-kit": "0.31.11",
+		"esbuild": "^0.28.2",
+		"eslint": "^10.14.0",
+		"eslint-import-resolver-typescript": "^4.4.5",
+		"eslint-plugin-boundaries": "^7.4.2",
+		"happy-dom": "21.0.4",
+		"jiti": "2.7.0",
+		"jpeg-js": "^0.4.4",
+		"marked": "^18.1.3",
+		"pngjs": "^7.0.0",
+		"svelte": "^5.57.3",
+		"svelte-check": "^4.7.8",
+		"svelte-eslint-parser": "^1.10.1",
+		"tailwindcss": "^4.3.5",
+		"tsx": "^4.23.15",
+		"typescript": "6.0.3",
+		"typescript-eslint": "^8.72.1",
+		"vite": "8.3.7",
+		"vitest": "5.1.0"
+	},
+	"allowScripts": {
+		"esbuild@0.28.2": true,
+		"better-sqlite3@13.0.3": false,
+		"esbuild@0.25.12": false,
+		"esbuild@0.18.20": false
+	}
+}

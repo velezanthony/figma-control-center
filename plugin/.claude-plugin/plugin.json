@@ -1,0 +1,12 @@
+{
+	"name": "figma-control-center",
+	"version": "0.1.0",
+	"description": "Agent skills for Figma Control Center: how to keep a Figma file in sync with your code through the figma_* MCP tools, and the design criteria (components, tokens, states, accessibility, review) to apply while doing it.",
+	"author": {
+		"name": "Anthony Velez Tapia"
+	},
+	"homepage": "https://github.com/velezanthony/figma-control-center",
+	"repository": "https://github.com/velezanthony/figma-control-center",
+	"license": "MIT",
+	"keywords": ["figma", "design-system", "mcp", "plugin-api", "design-tokens"]
+}

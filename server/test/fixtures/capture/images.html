@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Imágenes y svg</title>
+<style>
+body { margin: 0; }
+#triangulo { width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 6px solid rgb(255, 0, 0); }
+#fondo { width: 30px; height: 30px; background: url(dot.svg) no-repeat 0 0 / 10px 10px; }
+</style>
+</head>
+<body><img src="dot.svg" width="40" height="20" alt=""><svg width="24" height="24" viewBox="0 0 24 24" style="color: rgb(0, 128, 0); display: block"><path d="M0 0L24 24" stroke="currentColor"/></svg><div id="triangulo"></div><canvas id="lienzo" width="10" height="10" style="display: block"></canvas><div id="fondo"></div>
+<script>
+const g = document.getElementById("lienzo").getContext("2d");
+g.fillStyle = "rgb(0, 0, 255)";
+g.fillRect(0, 0, 10, 10);
+</script>
+</body>
+</html>

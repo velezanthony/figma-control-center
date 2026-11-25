@@ -1,0 +1,73 @@
+{
+	"contract": "areas@1",
+	"linkRules": {
+		"clickable": {
+			"names": ["boton", "enlace"],
+			"namePrefixes": ["enlace ·"],
+			"components": ["Boton", "Pestaña"]
+		},
+		"rows": { "row": ["fila"], "body": ["cuerpo"] },
+		"transition": { "type": "DISSOLVE", "easing": "EASE_OUT", "duration": 0.2 }
+	},
+	"areas": [
+		{
+			"name": "Panel",
+			"page": "Panel",
+			"frame": { "width": 1440, "minHeight": 900, "fill": "superficie", "clip": true },
+			"place": {
+				"mode": "replace-content",
+				"source": { "pagePrefix": "tmp ", "take": "first-variant" },
+				"unwrap": { "holding": ["lateral"] }
+			},
+			"shell": {
+				"set": "Panel / Lateral",
+				"in": ["lateral"],
+				"variantProp": "activa",
+				"default": "inicio",
+				"fixed": { "height": 900 }
+			},
+			"main": ["principal"],
+			"screens": [
+				{ "frame": "Inicio", "screen": "inicio", "shell": "inicio" },
+				{ "frame": "Detalle", "screen": "privado", "shell": "detalle" }
+			],
+			"links": [
+				{ "from": "Inicio", "text": "Ver detalle", "to": "Detalle" },
+				{ "from": "Inicio", "text": "Botón que no existe", "to": "Detalle" },
+				{ "from": "Inicio", "rows": true, "to": "Detalle" }
+			],
+			"flowStart": { "frame": "Inicio", "name": "Panel" },
+			"fills": [
+				{
+					"frame": "Detalle",
+					"find": { "text": "+", "minSize": [300, 200] },
+					"asset": "map.png",
+					"name": "mapa"
+				}
+			]
+		},
+		{
+			"name": "Portada",
+			"page": "Portada",
+			"frame": { "width": 1280, "minHeight": 800 },
+			"place": {
+				"mode": "transplant",
+				"source": { "pagePrefix": "tmp ", "take": "first-component" },
+				"keep": ["Cabecera", "Pie"],
+				"drop": ["cabecera", "pie"]
+			},
+			"screens": [{ "frame": "Portada" }]
+		}
+	],
+	"shared": [
+		{
+			"name": "Perfil",
+			"set": "Perfil / Contenido",
+			"page": { "name": "Compartido", "after": "Panel" },
+			"part": ["principal"],
+			"variantProp": "area",
+			"from": [{ "area": "Panel", "frame": "Inicio", "value": "panel" }],
+			"sheet": { "gap": 40, "padding": 40 }
+		}
+	]
+}

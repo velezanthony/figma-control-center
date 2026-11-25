@@ -1,0 +1,16 @@
+{
+	"$schema": "https://www.schemastore.org/tsconfig",
+	"extends": [
+		"@tsconfig/strictest/tsconfig.json",
+		"@tsconfig/node24/tsconfig.json"
+	],
+	"compilerOptions": {
+		"moduleResolution": "nodenext",
+		"verbatimModuleSyntax": true,
+		"erasableSyntaxOnly": true,
+		"moduleDetection": "force",
+		"noUncheckedSideEffectImports": true,
+		"noEmit": true,
+		"allowImportingTsExtensions": true
+	}
+}

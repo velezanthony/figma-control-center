@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Pseudo y marcadores</title>
+<style>
+body { margin: 0; font-family: sans-serif; font-size: 14px; }
+.cita::before { content: "«"; }
+.cita::after { content: "»"; }
+.cuadrados { list-style: square; }
+</style>
+</head>
+<body><p class="cita">Texto</p><ul><li>uno</li><li>dos</li></ul><ol start="3"><li>a</li></ol><ul class="cuadrados"><li>x</li></ul></body>
+</html>

@@ -1,0 +1,51 @@
+name: Feature request
+description: Suggest a new capability or an improvement.
+title: "[feat] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you trying to solve?
+      description: |
+        Describe the use case first, not the solution. "I want to ..." is more
+        useful than "Add ...".
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: |
+        How would you like this to work? If it involves a tool, a kit step or a
+        contract, sketch its input and output.
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: What did you try, or what are you doing today instead (a script, a manifest…)?
+
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Which part?
+      options:
+        - MCP tools
+        - Figma kit / kit steps
+        - Web capture
+        - Contracts (schemas/)
+        - Activity dashboard
+        - Agent harness / chat
+        - Not sure
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope check
+      options:
+        - label: It can be done with a script file read from disk; the tool never needs the model to carry large payloads.
+        - label: It stays generic — no knowledge of one particular project baked into the server.

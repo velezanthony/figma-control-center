@@ -1,0 +1,154 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"type": "object",
+	"properties": {
+		"contract": {
+			"type": "string",
+			"const": "project@1"
+		},
+		"web": {
+			"type": "object",
+			"properties": {
+				"baseUrl": {
+					"type": "string",
+					"pattern": "^https?:\\/\\/",
+					"description": "Raíz de la web: no se navega fuera de ella."
+				},
+				"viewport": {
+					"type": "object",
+					"properties": {
+						"w": {
+							"type": "integer",
+							"exclusiveMinimum": 0,
+							"maximum": 9007199254740991
+						},
+						"h": {
+							"type": "integer",
+							"exclusiveMinimum": 0,
+							"maximum": 9007199254740991
+						}
+					},
+					"required": ["w", "h"],
+					"additionalProperties": false
+				},
+				"screenScale": {
+					"description": "--force-device-scale-factor del Chrome de captura (1 por defecto).",
+					"type": "number",
+					"exclusiveMinimum": 0
+				},
+				"devicePixelRatio": {
+					"description": "deviceScaleFactor que se emula (1 por defecto).",
+					"type": "number",
+					"exclusiveMinimum": 0
+				},
+				"login": {
+					"type": "object",
+					"properties": {
+						"path": {
+							"type": "string",
+							"pattern": "^\\/(?!\\/)",
+							"description": "Ruta del formulario de login bajo baseUrl."
+						},
+						"fields": {
+							"type": "object",
+							"properties": {
+								"user": {
+									"type": "string",
+									"minLength": 1,
+									"description": "Selector del campo de usuario."
+								},
+								"password": {
+									"type": "string",
+									"minLength": 1,
+									"description": "Selector del campo de contraseña."
+								}
+							},
+							"required": ["user", "password"],
+							"additionalProperties": false
+						},
+						"submit": {
+							"description": "Selector del botón de enviar; sin él, se envía el formulario.",
+							"type": "string",
+							"minLength": 1
+						}
+					},
+					"required": ["path", "fields"],
+					"additionalProperties": false
+				},
+				"users": {
+					"type": "object",
+					"propertyNames": {
+						"type": "string",
+						"minLength": 1
+					},
+					"additionalProperties": {
+						"type": "object",
+						"properties": {
+							"username": {
+								"type": "string",
+								"minLength": 1
+							},
+							"secretRef": {
+								"type": "string",
+								"minLength": 1,
+								"description": "Nombre de la contraseña en FCC_WEB_SECRETS_FILE: nunca la contraseña."
+							}
+						},
+						"required": ["username", "secretRef"],
+						"additionalProperties": false
+					}
+				},
+				"strip": {
+					"description": "Selectores que se quitan antes de capturar.",
+					"type": "array",
+					"items": {
+						"type": "string",
+						"minLength": 1
+					}
+				},
+				"hideScrollbar": {
+					"type": "boolean"
+				}
+			},
+			"required": ["baseUrl", "viewport"],
+			"additionalProperties": false
+		},
+		"screens": {
+			"type": "string",
+			"minLength": 1,
+			"description": "Ruta al screens@1, relativa a este fichero."
+		},
+		"hooks": {
+			"description": "Ruta al módulo de ganchos, relativa a este fichero.",
+			"type": "string",
+			"minLength": 1
+		},
+		"areas": {
+			"description": "Ruta al areas@1, relativa a este fichero.",
+			"type": "string",
+			"minLength": 1
+		},
+		"map": {
+			"description": "Ruta al map@1, relativa a este fichero.",
+			"type": "string",
+			"minLength": 1
+		},
+		"sheets": {
+			"description": "Ruta al sheets@1 (hojas de componentes), relativa a este fichero.",
+			"type": "string",
+			"minLength": 1
+		},
+		"compose": {
+			"description": "Carpeta de los compose@1 (pantallas diseñadas en Figma sin web previa), relativa a este fichero.",
+			"type": "string",
+			"minLength": 1
+		},
+		"recognize": {
+			"description": "Ruta al módulo recognize@1 (código del proyecto: reglas de reconocimiento), relativa a este fichero.",
+			"type": "string",
+			"minLength": 1
+		}
+	},
+	"required": ["contract", "web", "screens"],
+	"additionalProperties": false
+}

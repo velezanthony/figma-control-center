@@ -1,0 +1,529 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"type": "object",
+	"properties": {
+		"contract": {
+			"type": "string",
+			"const": "areas@1"
+		},
+		"linkRules": {
+			"type": "object",
+			"properties": {
+				"clickable": {
+					"type": "object",
+					"properties": {
+						"names": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"minLength": 1
+							}
+						},
+						"namePrefixes": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"minLength": 1
+							}
+						},
+						"components": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"minLength": 1
+							}
+						},
+						"parts": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"name": {
+										"type": "string",
+										"minLength": 1
+									},
+									"insideComponent": {
+										"type": "string",
+										"minLength": 1
+									}
+								},
+								"required": ["name", "insideComponent"],
+								"additionalProperties": false
+							}
+						}
+					},
+					"required": ["names", "namePrefixes", "components"],
+					"additionalProperties": false
+				},
+				"rows": {
+					"type": "object",
+					"properties": {
+						"row": {
+							"minItems": 1,
+							"type": "array",
+							"items": {
+								"type": "string",
+								"minLength": 1
+							}
+						},
+						"body": {
+							"minItems": 1,
+							"type": "array",
+							"items": {
+								"type": "string",
+								"minLength": 1
+							}
+						}
+					},
+					"required": ["row", "body"],
+					"additionalProperties": false
+				},
+				"transition": {
+					"type": "object",
+					"properties": {
+						"type": {
+							"type": "string",
+							"enum": ["DISSOLVE", "INSTANT", "SMART_ANIMATE"]
+						},
+						"easing": {
+							"type": "string",
+							"enum": ["EASE_OUT", "EASE_IN", "EASE_IN_AND_OUT", "LINEAR"]
+						},
+						"duration": {
+							"type": "number",
+							"minimum": 0
+						}
+					},
+					"required": ["type", "easing", "duration"],
+					"additionalProperties": false
+				}
+			},
+			"required": ["clickable", "rows", "transition"],
+			"additionalProperties": false
+		},
+		"areas": {
+			"minItems": 1,
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string",
+						"minLength": 1
+					},
+					"page": {
+						"type": "string",
+						"minLength": 1,
+						"description": "Página de Figma, por nombre recortado."
+					},
+					"frame": {
+						"type": "object",
+						"properties": {
+							"width": {
+								"type": "integer",
+								"exclusiveMinimum": 0,
+								"maximum": 9007199254740991
+							},
+							"minHeight": {
+								"type": "integer",
+								"exclusiveMinimum": 0,
+								"maximum": 9007199254740991
+							},
+							"fill": {
+								"description": "Variable de color del relleno por defecto del frame.",
+								"type": "string",
+								"minLength": 1
+							},
+							"clip": {
+								"type": "boolean"
+							}
+						},
+						"required": ["width", "minHeight"],
+						"additionalProperties": false
+					},
+					"place": {
+						"type": "object",
+						"properties": {
+							"mode": {
+								"type": "string",
+								"enum": ["replace-content", "transplant"]
+							},
+							"source": {
+								"type": "object",
+								"properties": {
+									"pagePrefix": {
+										"type": "string",
+										"minLength": 1,
+										"description": "Las páginas temporales se llaman prefijo + frame."
+									},
+									"take": {
+										"type": "string",
+										"enum": ["first-variant", "first-component", "first-frame"]
+									},
+									"remove": {
+										"type": "boolean"
+									}
+								},
+								"required": ["pagePrefix", "take"],
+								"additionalProperties": false
+							},
+							"unwrap": {
+								"type": "object",
+								"properties": {
+									"holding": {
+										"minItems": 1,
+										"type": "array",
+										"items": {
+											"type": "string",
+											"minLength": 1
+										}
+									}
+								},
+								"required": ["holding"],
+								"additionalProperties": false
+							},
+							"keep": {
+								"minItems": 1,
+								"type": "array",
+								"items": {
+									"type": "string",
+									"minLength": 1
+								}
+							},
+							"drop": {
+								"minItems": 1,
+								"type": "array",
+								"items": {
+									"type": "string",
+									"minLength": 1
+								}
+							},
+							"strokeScale": {
+								"type": "number",
+								"exclusiveMinimum": 0
+							}
+						},
+						"required": ["mode", "source"],
+						"additionalProperties": false
+					},
+					"shell": {
+						"type": "object",
+						"properties": {
+							"set": {
+								"type": "string",
+								"minLength": 1
+							},
+							"in": {
+								"minItems": 1,
+								"type": "array",
+								"items": {
+									"type": "string",
+									"minLength": 1
+								}
+							},
+							"variantProp": {
+								"type": "string",
+								"minLength": 1
+							},
+							"default": {
+								"type": "string",
+								"minLength": 1
+							},
+							"fixed": {
+								"type": "object",
+								"properties": {
+									"height": {
+										"type": "number",
+										"exclusiveMinimum": 0
+									}
+								},
+								"required": ["height"],
+								"additionalProperties": false
+							}
+						},
+						"required": ["set", "in", "variantProp", "default"],
+						"additionalProperties": false
+					},
+					"main": {
+						"minItems": 1,
+						"type": "array",
+						"items": {
+							"type": "string",
+							"minLength": 1
+						}
+					},
+					"screens": {
+						"minItems": 1,
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"frame": {
+									"type": "string",
+									"minLength": 1
+								},
+								"screen": {
+									"type": "string",
+									"minLength": 1
+								},
+								"shell": {
+									"type": "string",
+									"minLength": 1
+								}
+							},
+							"required": ["frame"],
+							"additionalProperties": false
+						}
+					},
+					"clickable": {
+						"type": "object",
+						"properties": {
+							"names": {
+								"type": "array",
+								"items": {
+									"type": "string",
+									"minLength": 1
+								}
+							},
+							"namePrefixes": {
+								"type": "array",
+								"items": {
+									"type": "string",
+									"minLength": 1
+								}
+							},
+							"components": {
+								"type": "array",
+								"items": {
+									"type": "string",
+									"minLength": 1
+								}
+							},
+							"parts": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"name": {
+											"type": "string",
+											"minLength": 1
+										},
+										"insideComponent": {
+											"type": "string",
+											"minLength": 1
+										}
+									},
+									"required": ["name", "insideComponent"],
+									"additionalProperties": false
+								}
+							}
+						},
+						"required": ["names", "namePrefixes", "components"],
+						"additionalProperties": false
+					},
+					"links": {
+						"type": "array",
+						"items": {
+							"anyOf": [
+								{
+									"type": "object",
+									"properties": {
+										"from": {
+											"type": "string",
+											"minLength": 1
+										},
+										"text": {
+											"type": "string",
+											"minLength": 1
+										},
+										"match": {
+											"type": "string",
+											"enum": ["exact", "start", "contains"]
+										},
+										"to": {
+											"type": "string",
+											"minLength": 1
+										}
+									},
+									"required": ["from", "text", "to"],
+									"additionalProperties": false
+								},
+								{
+									"type": "object",
+									"properties": {
+										"from": {
+											"type": "string",
+											"minLength": 1
+										},
+										"rows": {
+											"type": "boolean",
+											"const": true
+										},
+										"to": {
+											"type": "string",
+											"minLength": 1
+										}
+									},
+									"required": ["from", "rows", "to"],
+									"additionalProperties": false
+								}
+							]
+						}
+					},
+					"flowStart": {
+						"type": "object",
+						"properties": {
+							"frame": {
+								"type": "string",
+								"minLength": 1
+							},
+							"name": {
+								"type": "string",
+								"minLength": 1
+							}
+						},
+						"required": ["frame", "name"],
+						"additionalProperties": false
+					},
+					"fills": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"frame": {
+									"type": "string",
+									"minLength": 1
+								},
+								"find": {
+									"type": "object",
+									"properties": {
+										"text": {
+											"type": "string",
+											"minLength": 1
+										},
+										"minSize": {
+											"type": "array",
+											"prefixItems": [
+												{
+													"type": "number",
+													"exclusiveMinimum": 0
+												},
+												{
+													"type": "number",
+													"exclusiveMinimum": 0
+												}
+											],
+											"items": false,
+											"minItems": 2,
+											"maxItems": 2
+										}
+									},
+									"required": ["text", "minSize"],
+									"additionalProperties": false
+								},
+								"asset": {
+									"type": "string",
+									"minLength": 1,
+									"description": "Ruta relativa a este fichero."
+								},
+								"name": {
+									"type": "string",
+									"minLength": 1
+								}
+							},
+							"required": ["frame", "find", "asset"],
+							"additionalProperties": false
+						}
+					}
+				},
+				"required": ["name", "page", "frame", "place", "screens"],
+				"additionalProperties": false
+			}
+		},
+		"shared": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string",
+						"minLength": 1
+					},
+					"set": {
+						"type": "string",
+						"minLength": 1
+					},
+					"page": {
+						"type": "object",
+						"properties": {
+							"name": {
+								"type": "string",
+								"minLength": 1
+							},
+							"after": {
+								"type": "string",
+								"minLength": 1
+							}
+						},
+						"required": ["name"],
+						"additionalProperties": false
+					},
+					"part": {
+						"minItems": 1,
+						"type": "array",
+						"items": {
+							"type": "string",
+							"minLength": 1
+						}
+					},
+					"variantProp": {
+						"type": "string",
+						"minLength": 1
+					},
+					"from": {
+						"minItems": 1,
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"area": {
+									"type": "string",
+									"minLength": 1
+								},
+								"frame": {
+									"type": "string",
+									"minLength": 1
+								},
+								"value": {
+									"type": "string",
+									"minLength": 1
+								}
+							},
+							"required": ["area", "frame", "value"],
+							"additionalProperties": false
+						}
+					},
+					"sheet": {
+						"type": "object",
+						"properties": {
+							"gap": {
+								"type": "number",
+								"minimum": 0
+							},
+							"padding": {
+								"type": "number",
+								"minimum": 0
+							}
+						},
+						"required": ["gap", "padding"],
+						"additionalProperties": false
+					}
+				},
+				"required": ["name", "set", "page", "part", "variantProp", "from"],
+				"additionalProperties": false
+			}
+		}
+	},
+	"required": ["contract", "linkRules", "areas"],
+	"additionalProperties": false
+}

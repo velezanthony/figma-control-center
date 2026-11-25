@@ -1,0 +1,525 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"type": "object",
+	"properties": {
+		"contract": {
+			"type": "string",
+			"const": "sheets@1"
+		},
+		"style": {
+			"type": "object",
+			"properties": {
+				"header": {
+					"type": "object",
+					"properties": {
+						"fill": {
+							"type": "string",
+							"minLength": 1,
+							"description": "Nombre de una variable de Figma."
+						},
+						"text": {
+							"type": "string",
+							"minLength": 1,
+							"description": "Nombre de una variable de Figma."
+						}
+					},
+					"required": ["fill", "text"],
+					"additionalProperties": false
+				},
+				"card": {
+					"type": "object",
+					"properties": {
+						"fill": {
+							"type": "string",
+							"minLength": 1,
+							"description": "Nombre de una variable de Figma."
+						}
+					},
+					"required": ["fill"],
+					"additionalProperties": false
+				},
+				"texts": {
+					"type": "object",
+					"properties": {
+						"description": {
+							"type": "string",
+							"minLength": 1,
+							"description": "Nombre de una variable de Figma."
+						},
+						"bug": {
+							"type": "string",
+							"minLength": 1,
+							"description": "Nombre de una variable de Figma."
+						},
+						"tag": {
+							"type": "string",
+							"minLength": 1,
+							"description": "Nombre de una variable de Figma."
+						},
+						"rowLabel": {
+							"type": "string",
+							"minLength": 1,
+							"description": "Nombre de una variable de Figma."
+						},
+						"colLabel": {
+							"type": "string",
+							"minLength": 1,
+							"description": "Nombre de una variable de Figma."
+						}
+					},
+					"required": ["description", "bug", "tag", "rowLabel", "colLabel"],
+					"additionalProperties": false
+				},
+				"bug": {
+					"description": "Los textos del aviso de fallo conocido, en la tarjeta y en el set.",
+					"type": "object",
+					"properties": {
+						"prefix": {
+							"type": "string"
+						},
+						"setPrefix": {
+							"type": "string"
+						}
+					},
+					"required": ["prefix", "setPrefix"],
+					"additionalProperties": false
+				},
+				"matrix": {
+					"type": "object",
+					"properties": {
+						"stroke": {
+							"type": "string",
+							"minLength": 1,
+							"description": "Nombre de una variable de Figma."
+						}
+					},
+					"required": ["stroke"],
+					"additionalProperties": false
+				}
+			},
+			"required": ["header", "card", "texts", "matrix"],
+			"additionalProperties": false
+		},
+		"sections": {
+			"type": "object",
+			"propertyNames": {
+				"type": "string",
+				"minLength": 1
+			},
+			"additionalProperties": {
+				"type": "object",
+				"properties": {
+					"default": {
+						"type": "boolean"
+					}
+				},
+				"additionalProperties": false
+			}
+		},
+		"sheets": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"key": {
+						"type": "string",
+						"pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+					},
+					"screen": {
+						"type": "string",
+						"minLength": 1,
+						"description": "Pantalla de screens@1 de la que sale la hoja."
+					},
+					"title": {
+						"type": "string",
+						"minLength": 1
+					},
+					"page": {
+						"type": "object",
+						"properties": {
+							"name": {
+								"type": "string",
+								"minLength": 1
+							},
+							"after": {
+								"type": "string",
+								"minLength": 1
+							},
+							"section": {
+								"type": "string",
+								"minLength": 1
+							}
+						},
+						"required": ["name"],
+						"additionalProperties": false
+					},
+					"description": {
+						"type": "string"
+					},
+					"bug": {
+						"type": "string",
+						"minLength": 1
+					},
+					"tag": {
+						"type": "string",
+						"minLength": 1
+					},
+					"source": {
+						"description": "Ruta de la plantilla del componente en el código del proyecto (el mapeo a código de design-context@1).",
+						"type": "string",
+						"minLength": 1
+					},
+					"matrix": {
+						"type": "object",
+						"properties": {
+							"rows": {
+								"type": "array",
+								"items": {
+									"type": "string",
+									"minLength": 1
+								}
+							},
+							"align": {
+								"type": "string",
+								"enum": ["top", "center"]
+							}
+						},
+						"additionalProperties": false
+					},
+					"texts": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"name": {
+									"type": "string",
+									"minLength": 1
+								},
+								"match": {
+									"type": "string",
+									"minLength": 1
+								}
+							},
+							"required": ["name", "match"],
+							"additionalProperties": false
+						}
+					},
+					"booleans": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"name": {
+									"type": "string",
+									"minLength": 1
+								},
+								"layer": {
+									"type": "string",
+									"minLength": 1
+								},
+								"on": {
+									"type": "boolean"
+								}
+							},
+							"required": ["name", "layer"],
+							"additionalProperties": false
+						}
+					},
+					"icons": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"icon": {
+									"type": "string",
+									"minLength": 1
+								},
+								"boolean": {
+									"type": "string",
+									"minLength": 1
+								},
+								"swap": {
+									"type": "string",
+									"minLength": 1
+								},
+								"on": {
+									"type": "boolean"
+								},
+								"noBooleanWhen": {
+									"type": "object",
+									"propertyNames": {
+										"type": "string",
+										"minLength": 1
+									},
+									"additionalProperties": {
+										"type": "string"
+									}
+								}
+							},
+							"required": ["icon"],
+							"additionalProperties": false
+						}
+					},
+					"slots": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"name": {
+									"type": "string",
+									"minLength": 1
+								},
+								"layer": {
+									"type": "string",
+									"minLength": 1
+								},
+								"boolean": {
+									"type": "string",
+									"minLength": 1
+								}
+							},
+							"required": ["name", "layer"],
+							"additionalProperties": false
+						}
+					},
+					"names": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"classes": {
+									"type": "string",
+									"minLength": 1
+								},
+								"name": {
+									"type": "string",
+									"minLength": 1
+								}
+							},
+							"required": ["classes", "name"],
+							"additionalProperties": false
+						}
+					},
+					"exposed": {
+						"type": "array",
+						"items": {
+							"type": "string",
+							"minLength": 1
+						}
+					},
+					"flowIcons": {
+						"type": "boolean"
+					},
+					"rules": {
+						"type": "array",
+						"items": {
+							"type": "string",
+							"minLength": 1
+						}
+					},
+					"keep": {
+						"type": "array",
+						"items": {
+							"type": "string",
+							"minLength": 1
+						}
+					},
+					"drift": {
+						"anyOf": [
+							{
+								"type": "object",
+								"properties": {
+									"decision": {
+										"type": "string",
+										"enum": ["figma", "web"]
+									},
+									"fingerprint": {
+										"type": "object",
+										"properties": {
+											"variantProps": {
+												"type": "object",
+												"propertyNames": {
+													"type": "string",
+													"minLength": 1
+												},
+												"additionalProperties": {
+													"type": "array",
+													"items": {
+														"type": "string"
+													}
+												}
+											},
+											"variants": {
+												"type": "array",
+												"items": {
+													"type": "string",
+													"minLength": 1
+												}
+											},
+											"properties": {
+												"type": "array",
+												"items": {
+													"type": "string",
+													"minLength": 1
+												}
+											},
+											"layers": {
+												"type": "array",
+												"items": {
+													"type": "object",
+													"properties": {
+														"name": {
+															"type": "string"
+														},
+														"type": {
+															"type": "string",
+															"minLength": 1
+														},
+														"properties": {
+															"type": "array",
+															"items": {
+																"type": "string",
+																"minLength": 1
+															}
+														},
+														"variants": {
+															"type": "array",
+															"items": {
+																"type": "string",
+																"minLength": 1
+															}
+														}
+													},
+													"required": [
+														"name",
+														"type",
+														"properties",
+														"variants"
+													],
+													"additionalProperties": false
+												}
+											}
+										},
+										"required": [
+											"variantProps",
+											"variants",
+											"properties",
+											"layers"
+										],
+										"additionalProperties": false,
+										"description": "Cómo estaba el set en Figma al decidir: props de variante con sus valores, nombres de variantes y de propiedades (sin `#id`) y sus capas hechas a mano (nombre, tipo, propiedades que usan y variantes donde están), ordenados. El informe de SHEET_DRIFT la trae lista para copiar."
+									}
+								},
+								"required": ["decision", "fingerprint"],
+								"additionalProperties": false
+							},
+							{
+								"type": "object",
+								"properties": {
+									"decision": {
+										"type": "string",
+										"const": "map"
+									},
+									"values": {
+										"type": "object",
+										"propertyNames": {
+											"type": "string",
+											"minLength": 1
+										},
+										"additionalProperties": {
+											"type": "string",
+											"minLength": 1
+										}
+									},
+									"fingerprint": {
+										"type": "object",
+										"properties": {
+											"variantProps": {
+												"type": "object",
+												"propertyNames": {
+													"type": "string",
+													"minLength": 1
+												},
+												"additionalProperties": {
+													"type": "array",
+													"items": {
+														"type": "string"
+													}
+												}
+											},
+											"variants": {
+												"type": "array",
+												"items": {
+													"type": "string",
+													"minLength": 1
+												}
+											},
+											"properties": {
+												"type": "array",
+												"items": {
+													"type": "string",
+													"minLength": 1
+												}
+											},
+											"layers": {
+												"type": "array",
+												"items": {
+													"type": "object",
+													"properties": {
+														"name": {
+															"type": "string"
+														},
+														"type": {
+															"type": "string",
+															"minLength": 1
+														},
+														"properties": {
+															"type": "array",
+															"items": {
+																"type": "string",
+																"minLength": 1
+															}
+														},
+														"variants": {
+															"type": "array",
+															"items": {
+																"type": "string",
+																"minLength": 1
+															}
+														}
+													},
+													"required": [
+														"name",
+														"type",
+														"properties",
+														"variants"
+													],
+													"additionalProperties": false
+												}
+											}
+										},
+										"required": [
+											"variantProps",
+											"variants",
+											"properties",
+											"layers"
+										],
+										"additionalProperties": false,
+										"description": "Cómo estaba el set en Figma al decidir: props de variante con sus valores, nombres de variantes y de propiedades (sin `#id`) y sus capas hechas a mano (nombre, tipo, propiedades que usan y variantes donde están), ordenados. El informe de SHEET_DRIFT la trae lista para copiar."
+									}
+								},
+								"required": ["decision", "values", "fingerprint"],
+								"additionalProperties": false
+							}
+						],
+						"description": "Qué hacer cuando Figma va por delante de la web: `figma` (se salta la hoja), `web` (se rehace aceptando perder lo de Figma) o `map` (las variantes de la web se emparejan añadiéndoles `values` para las props que solo tiene Figma)."
+					}
+				},
+				"required": ["key", "screen", "title", "page", "description"],
+				"additionalProperties": false
+			}
+		}
+	},
+	"required": ["contract", "style", "sheets"],
+	"additionalProperties": false
+}

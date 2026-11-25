@@ -1,0 +1,15 @@
+{
+	"atomos.marca": {
+		"title": "Marca",
+		"tag": "span",
+		"cls": [
+			"marca",
+			"fuerte"
+		],
+		"opt": [],
+		"cond": {},
+		"defaults": {},
+		"sig": null,
+		"sig_cond": null
+	}
+}

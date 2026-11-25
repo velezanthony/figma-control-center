@@ -1,0 +1,102 @@
+name: Bug report
+description: Something doesn't work as expected.
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a bug report.
+
+        The server keeps a history of every call. The **failing call** (its input, its
+        `error` and `nextStep`) is most of the report: `figma_history_errors` or the
+        Activity page of the dashboard give it to you.
+
+        **Do not paste** Figma file URLs or keys, cookies, the Chrome profile, `.env`
+        values or chat tokens. Replace them with placeholders.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear description of what's wrong.
+      placeholder: When I call X with Y, I get Z, but I expected W.
+    validations:
+      required: true
+
+  - type: textarea
+    id: call
+    attributes:
+      label: The call that fails
+      description: |
+        The tool, its input and the response (`ok`, `error`, `retryable`). For a script,
+        the smallest script that reproduces it. Paste text, not a screenshot.
+      render: json
+    validations:
+      required: true
+
+  - type: textarea
+    id: status
+    attributes:
+      label: figma_status output
+      description: What `figma_status` answers right before or after the failure.
+      render: json
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. make chrome
+        2. In Claude Code, call figma_run_script with …
+        3. Notice that …
+    validations:
+      required: true
+
+  - type: input
+    id: commit
+    attributes:
+      label: Commit
+      description: "`git rev-parse --short HEAD` in your checkout."
+    validations:
+      required: true
+
+  - type: input
+    id: node
+    attributes:
+      label: Node version
+      description: "`node -v`. The project requires Node 24 or newer."
+    validations:
+      required: true
+
+  - type: input
+    id: claude-code
+    attributes:
+      label: Claude Code version
+      description: "`claude --version`."
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - Linux
+        - macOS
+        - Windows
+        - Other
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-flight checks
+      options:
+        - label: I've searched existing issues and confirmed this is not a duplicate.
+          required: true
+        - label: I've reproduced this on the latest commit of the default branch.
+          required: true
+        - label: The report contains no Figma file URL or key, cookie, token or `.env` value.
+          required: true
+        - label: This is not a security vulnerability (those go through private reporting — see SECURITY.md).
+          required: true

@@ -1,0 +1,34 @@
+{
+	"contract": "project@1",
+	"web": {
+		"baseUrl": "http://127.0.0.1:1",
+		"viewport": {
+			"w": 800,
+			"h": 600
+		},
+		"login": {
+			"path": "/entrar/",
+			"fields": {
+				"user": "#usuario",
+				"password": "#clave"
+			}
+		},
+		"users": {
+			"lector": {
+				"username": "lector",
+				"secretRef": "example-mini-lector"
+			}
+		},
+		"strip": [
+			".aviso-flotante"
+		],
+		"hideScrollbar": true
+	},
+	"screens": "screens.json",
+	"hooks": "hooks.js",
+	"areas": "areas.json",
+	"map": "map.json",
+	"recognize": "recognize.js",
+	"sheets": "sheets.json",
+	"compose": "compose/"
+}

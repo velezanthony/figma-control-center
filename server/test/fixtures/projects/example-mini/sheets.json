@@ -1,0 +1,54 @@
+{
+	"contract": "sheets@1",
+	"style": {
+		"header": {
+			"fill": "gris/900",
+			"text": "gris/50"
+		},
+		"card": {
+			"fill": "gris/50"
+		},
+		"texts": {
+			"description": "gris/900",
+			"bug": "gris/900",
+			"tag": "gris/900",
+			"rowLabel": "gris/900",
+			"colLabel": "gris/900"
+		},
+		"bug": {
+			"prefix": "Fallo: ",
+			"setPrefix": "FALLO: "
+		},
+		"matrix": {
+			"stroke": "gris/900"
+		}
+	},
+	"sheets": [
+		{
+			"key": "marca",
+			"screen": "cmp-marca",
+			"title": "Marca",
+			"page": {
+				"name": "   Marca",
+				"after": "Panel"
+			},
+			"description": "La marca de la cabecera",
+			"tag": "<span class=\"marca\">",
+			"source": "plantillas/marca.html",
+			"matrix": {
+				"rows": [
+					"tamano"
+				]
+			},
+			"texts": [
+				{
+					"name": "etiqueta",
+					"match": "Marca"
+				}
+			],
+			"rules": [
+				"Boton"
+			]
+		}
+	]
+}

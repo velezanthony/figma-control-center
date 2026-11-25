@@ -1,0 +1,88 @@
+{
+	"version": "6",
+	"dialect": "sqlite",
+	"id": "67bfbff8-dd7f-40c5-b370-e4c39e0c8617",
+	"prevId": "00000000-0000-0000-0000-000000000000",
+	"tables": {
+		"projects": {
+			"name": "projects",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "integer",
+					"primaryKey": true,
+					"notNull": true,
+					"autoincrement": true
+				},
+				"name": {
+					"name": "name",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"project_dir": {
+					"name": "project_dir",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"file_url": {
+					"name": "file_url",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"file_key": {
+					"name": "file_key",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"scripts_roots": {
+					"name": "scripts_roots",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"output_dir": {
+					"name": "output_dir",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				}
+			},
+			"indexes": {
+				"projects_file_key": {
+					"name": "projects_file_key",
+					"columns": ["file_key"],
+					"isUnique": true
+				},
+				"projects_output_dir": {
+					"name": "projects_output_dir",
+					"columns": ["output_dir"],
+					"isUnique": true
+				}
+			},
+			"foreignKeys": {},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"checkConstraints": {}
+		}
+	},
+	"views": {},
+	"enums": {},
+	"_meta": {
+		"schemas": {},
+		"tables": {},
+		"columns": {}
+	},
+	"internal": {
+		"indexes": {}
+	}
+}

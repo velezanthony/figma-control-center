@@ -1,0 +1,55 @@
+{
+	"version": "7",
+	"dialect": "sqlite",
+	"entries": [
+		{
+			"idx": 0,
+			"version": "6",
+			"when": 1794268000258,
+			"tag": "0000_projects",
+			"breakpoints": true
+		},
+		{
+			"idx": 1,
+			"version": "6",
+			"when": 1794269697256,
+			"tag": "0001_history",
+			"breakpoints": true
+		},
+		{
+			"idx": 2,
+			"version": "6",
+			"when": 1794269700245,
+			"tag": "0002_fts",
+			"breakpoints": true
+		},
+		{
+			"idx": 3,
+			"version": "6",
+			"when": 1794270933672,
+			"tag": "0003_settings",
+			"breakpoints": true
+		},
+		{
+			"idx": 4,
+			"version": "6",
+			"when": 1794271656645,
+			"tag": "0004_migration_report",
+			"breakpoints": true
+		},
+		{
+			"idx": 5,
+			"version": "6",
+			"when": 1794435329080,
+			"tag": "0005_attempts",
+			"breakpoints": true
+		},
+		{
+			"idx": 6,
+			"version": "6",
+			"when": 1794861078795,
+			"tag": "0006_drop_migration_reports",
+			"breakpoints": true
+		}
+	]
+}

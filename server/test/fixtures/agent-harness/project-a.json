@@ -1,0 +1,143 @@
+{
+	"settings": {
+		"permissions": {
+			"defaultMode": "default",
+			"disableBypassPermissionsMode": "disable",
+			"blockReadsOutsideWorkingDirectories": true,
+			"blockWritesOutsideWorkingDirectories": true,
+			"allow": [
+				"mcp__figma-control-center__figma_status",
+				"mcp__figma-control-center__figma_screenshot",
+				"mcp__figma-control-center__figma_metadata",
+				"mcp__figma-control-center__figma_variables",
+				"mcp__figma-control-center__figma_styles",
+				"mcp__figma-control-center__figma_components",
+				"mcp__figma-control-center__figma_instances",
+				"mcp__figma-control-center__figma_export",
+				"mcp__figma-control-center__figma_design_context",
+				"mcp__figma-control-center__figma_get_job",
+				"mcp__figma-control-center__figma_history_summary",
+				"mcp__figma-control-center__figma_history_errors",
+				"mcp__figma-control-center__figma_history_nodes",
+				"mcp__figma-control-center__figma_history_sessions",
+				"mcp__figma-control-center__figma_history_search",
+				"mcp__figma-control-center__figma_history_call",
+				"mcp__figma-control-center__figma_history_attempts",
+				"mcp__figma-control-center__figma_history_script",
+				"mcp__figma-control-center__figma_history_diff",
+				"mcp__figma-control-center__figma_chat_reply"
+			],
+			"deny": [
+				"Read(**/.env)",
+				"Read(**/.env.*)",
+				"Read(**/.envrc)",
+				"Read(**/*.pem)",
+				"Read(**/*.key)",
+				"Read(**/id_rsa*)",
+				"Read(**/.npmrc)",
+				"Read(**/.netrc)",
+				"Read(~/.ssh/**)",
+				"Read(~/.aws/**)",
+				"Read(~/.config/gcloud/**)",
+				"Read(~/.claude/**)",
+				"Read(//opt/figma-control-center/.env)",
+				"Read(//opt/figma-control-center/.env.*)",
+				"Read(**/chat-tokens/**)",
+				"Edit(**/chat-tokens/**)",
+				"Read(//opt/figma-control-center/output/chat-tokens/**)",
+				"Read(//srv/salida-a/chat-tokens/**)",
+				"Read(//opt/figma-control-center/output/figma.db)",
+				"Read(//opt/figma-control-center/output/figma.db-wal)",
+				"Read(//opt/figma-control-center/output/figma.db-shm)",
+				"Read(//home/dueno/.config/figma-control-center/secrets.json)",
+				"Edit(//home/dueno/.config/figma-control-center/secrets.json)",
+				"Read(//proc/**)",
+				"Edit(**/.claude/**)",
+				"Edit(**/.mcp.json)",
+				"Edit(**/CLAUDE.md)",
+				"Edit(**/.git/**)",
+				"Bash",
+				"WebFetch",
+				"WebSearch",
+				"Bash(git push *)",
+				"Write",
+				"Edit",
+				"NotebookEdit",
+				"mcp__figma-control-center__figma_run_script",
+				"mcp__figma-control-center__figma_build",
+				"mcp__figma-control-center__figma_cancel_job",
+				"mcp__figma-control-center__figma_capture"
+			]
+		},
+		"disableClaudeAiConnectors": true,
+		"autoMemoryEnabled": false,
+		"claudeMdExcludes": ["/home/dueno/.claude/CLAUDE.md"],
+		"hooks": {
+			"PreToolUse": [
+				{
+					"matcher": "Read|Glob|Grep|Write|Edit|NotebookEdit|mcp__figma-control-center__.*",
+					"hooks": [
+						{
+							"type": "command",
+							"command": "'/usr/bin/node' '/opt/figma-control-center/server/src/agent-guard.ts' '/tmp/figma-agent-L1'"
+						}
+					]
+				}
+			]
+		}
+	},
+	"mcpConfig": {
+		"mcpServers": {
+			"figma-control-center": {
+				"type": "stdio",
+				"command": "/usr/bin/node",
+				"args": ["/opt/figma-control-center/server/src/main.ts"],
+				"env": { "FCC_PROJECTS": "1", "FCC_CHAT_AGENT": "1" }
+			}
+		}
+	},
+	"args": [
+		"--restricted",
+		"--settings",
+		"/tmp/figma-agent-L1/settings.json",
+		"--mcp-config",
+		"/tmp/figma-agent-L1/mcp.json",
+		"--strict-mcp-config",
+		"--tools",
+		"Read,Glob,Grep",
+		"--permission-mode",
+		"default",
+		"--add-dir",
+		"/srv/proyecto-a/scripts-figma",
+		"--add-dir",
+		"/srv/salida-a",
+		"--disable-slash-commands",
+		"--no-chrome",
+		"--dangerously-load-development-channels",
+		"server:figma-control-center"
+	],
+	"cwd": "/srv/proyecto-a",
+	"env": { "FCC_CHAT_AGENT": "1", "FCC_PROJECTS": "1" },
+	"guard": {
+		"repoRoot": "/opt/figma-control-center",
+		"roots": [
+			"/srv/proyecto-a",
+			"/srv/proyecto-a/scripts-figma",
+			"/srv/salida-a"
+		],
+		"denied": [
+			"/opt/figma-control-center/.env",
+			"/opt/figma-control-center/output/chat-tokens",
+			"/srv/salida-a/chat-tokens",
+			"/opt/figma-control-center/output/figma.db",
+			"/opt/figma-control-center/output/figma.db-wal",
+			"/opt/figma-control-center/output/figma.db-shm",
+			"/home/dueno/.config/figma-control-center/secrets.json",
+			"/home/dueno/.ssh",
+			"/home/dueno/.aws",
+			"/home/dueno/.config/gcloud",
+			"/home/dueno/.claude",
+			"/proc"
+		]
+	}
+}

@@ -1,0 +1,11 @@
+{
+	"contract": "compose@1",
+	"key": "broken",
+	"title": "Ficha rota",
+	"target": { "page": "Pruebas", "width": 480 },
+	"root": {
+		"stack": "VERTICAL",
+		"fill": "#ff6600",
+		"children": [{ "use": "tarjeta" }, { "use": "marca", "variant": { "tamano": "xl" } }]
+	}
+}

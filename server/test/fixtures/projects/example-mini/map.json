@@ -1,0 +1,95 @@
+{
+	"contract": "map@1",
+	"tokens": {
+		"collections": [
+			"Base"
+		],
+		"classPrefixes": {
+			"fill": [
+				"bg-"
+			],
+			"text": [
+				"text-"
+			],
+			"stroke": [
+				"border-"
+			]
+		},
+		"classToVariable": [
+			{
+				"from": "^(.+)$",
+				"to": "$1"
+			}
+		],
+		"fallback": {
+			"collection": "Base"
+		},
+		"numbers": {
+			"radius": {
+				"prefix": "radius/",
+				"full": "radius/full"
+			},
+			"spacing": {
+				"prefix": "spacing/"
+			}
+		}
+	},
+	"fonts": {
+		"families": [
+			{
+				"match": "mono|courier",
+				"family": "Mono"
+			}
+		],
+		"default": "Sans",
+		"styles": {
+			"400": "Regular",
+			"700": "Bold"
+		},
+		"italic": {
+			"suffix": "Italic"
+		},
+		"strict": [
+			"Mono"
+		]
+	},
+	"effects": {
+		"classPattern": "^shadow(-\\w+)?$"
+	},
+	"icons": {
+		"pages": "Iconos",
+		"prefix": "icons/",
+		"catalog": "icons.json"
+	},
+	"layers": {
+		"roles": {
+			"header": "cabecera",
+			"main": "principal",
+			"button": "botón",
+			"p": "párrafo",
+			"ul": "lista",
+			"li": "elemento"
+		},
+		"textPrefix": true
+	},
+	"screen": {
+		"background": "gris/50"
+	},
+	"components": {
+		"fingerprints": "fingerprints.json",
+		"leaf": [
+			"atomos.marca"
+		],
+		"genericClasses": [
+			"flex",
+			"items-\\S+"
+		]
+	},
+	"screens": {
+		"inicio": {
+			"rules": [
+				"Boton"
+			]
+		}
+	}
+}

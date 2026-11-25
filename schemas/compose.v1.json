@@ -1,0 +1,242 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"type": "object",
+	"properties": {
+		"contract": {
+			"type": "string",
+			"const": "compose@1"
+		},
+		"key": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+		},
+		"title": {
+			"type": "string",
+			"minLength": 1
+		},
+		"target": {
+			"type": "object",
+			"properties": {
+				"page": {
+					"type": "string",
+					"minLength": 1
+				},
+				"frame": {
+					"type": "string",
+					"minLength": 1
+				},
+				"width": {
+					"type": "number",
+					"exclusiveMinimum": 0
+				},
+				"height": {
+					"type": "number",
+					"exclusiveMinimum": 0
+				}
+			},
+			"required": ["page", "width"],
+			"additionalProperties": false
+		},
+		"root": {
+			"$ref": "#/$defs/__schema0"
+		}
+	},
+	"required": ["contract", "key", "title", "target", "root"],
+	"additionalProperties": false,
+	"$defs": {
+		"__schema0": {
+			"anyOf": [
+				{
+					"type": "object",
+					"properties": {
+						"stack": {
+							"type": "string",
+							"enum": ["VERTICAL", "HORIZONTAL", "GRID"]
+						},
+						"gap": {
+							"type": "string",
+							"minLength": 1,
+							"description": "Nombre de una variable o de un estilo de Figma: nunca un número ni un color suelto."
+						},
+						"padding": {
+							"anyOf": [
+								{
+									"type": "string",
+									"minLength": 1,
+									"description": "Nombre de una variable o de un estilo de Figma: nunca un número ni un color suelto."
+								},
+								{
+									"minItems": 1,
+									"type": "array",
+									"items": {
+										"type": "string",
+										"minLength": 1,
+										"description": "Nombre de una variable o de un estilo de Figma: nunca un número ni un color suelto."
+									}
+								}
+							]
+						},
+						"fill": {
+							"type": "string",
+							"minLength": 1,
+							"description": "Nombre de una variable o de un estilo de Figma: nunca un número ni un color suelto."
+						},
+						"radius": {
+							"type": "string",
+							"minLength": 1,
+							"description": "Nombre de una variable o de un estilo de Figma: nunca un número ni un color suelto."
+						},
+						"sizing": {
+							"type": "object",
+							"properties": {
+								"h": {
+									"type": "string",
+									"enum": ["FIXED", "HUG", "FILL"]
+								},
+								"v": {
+									"type": "string",
+									"enum": ["FIXED", "HUG", "FILL"]
+								}
+							},
+							"required": ["h", "v"],
+							"additionalProperties": false
+						},
+						"name": {
+							"type": "string",
+							"minLength": 1
+						},
+						"children": {
+							"type": "array",
+							"items": {
+								"$ref": "#/$defs/__schema0"
+							}
+						}
+					},
+					"required": ["stack", "children"],
+					"additionalProperties": false
+				},
+				{
+					"type": "object",
+					"properties": {
+						"use": {
+							"anyOf": [
+								{
+									"type": "string",
+									"minLength": 1
+								},
+								{
+									"type": "object",
+									"properties": {
+										"key": {
+											"type": "string",
+											"minLength": 1
+										}
+									},
+									"required": ["key"],
+									"additionalProperties": false
+								}
+							]
+						},
+						"variant": {
+							"type": "object",
+							"propertyNames": {
+								"type": "string"
+							},
+							"additionalProperties": {
+								"type": "string"
+							}
+						},
+						"props": {
+							"type": "object",
+							"propertyNames": {
+								"type": "string"
+							},
+							"additionalProperties": {
+								"type": ["string", "boolean"]
+							}
+						},
+						"slots": {
+							"type": "object",
+							"propertyNames": {
+								"type": "string"
+							},
+							"additionalProperties": {
+								"type": "array",
+								"items": {
+									"$ref": "#/$defs/__schema0"
+								}
+							}
+						},
+						"name": {
+							"type": "string",
+							"minLength": 1
+						}
+					},
+					"required": ["use"],
+					"additionalProperties": false
+				},
+				{
+					"type": "object",
+					"properties": {
+						"text": {
+							"type": "string"
+						},
+						"style": {
+							"type": "string",
+							"minLength": 1,
+							"description": "Nombre de una variable o de un estilo de Figma: nunca un número ni un color suelto."
+						},
+						"color": {
+							"type": "string",
+							"minLength": 1,
+							"description": "Nombre de una variable o de un estilo de Figma: nunca un número ni un color suelto."
+						},
+						"name": {
+							"type": "string",
+							"minLength": 1
+						}
+					},
+					"required": ["text", "style"],
+					"additionalProperties": false
+				},
+				{
+					"type": "object",
+					"properties": {
+						"image": {
+							"type": "string",
+							"minLength": 1,
+							"description": "Ruta en la carpeta del proyecto."
+						},
+						"fit": {
+							"type": "string",
+							"enum": ["fill", "fit", "crop", "tile"]
+						},
+						"name": {
+							"type": "string",
+							"minLength": 1
+						}
+					},
+					"required": ["image"],
+					"additionalProperties": false
+				},
+				{
+					"type": "object",
+					"properties": {
+						"icon": {
+							"type": "string",
+							"minLength": 1,
+							"description": "Un nombre del catálogo de iconos de map@1."
+						},
+						"color": {
+							"type": "string",
+							"minLength": 1,
+							"description": "Nombre de una variable o de un estilo de Figma: nunca un número ni un color suelto."
+						}
+					},
+					"required": ["icon"],
+					"additionalProperties": false
+				}
+			]
+		}
+	}
+}

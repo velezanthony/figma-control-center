@@ -1,0 +1,58 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"type": "object",
+	"properties": {
+		"createdNodeIds": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			},
+			"description": "Ids de los nodos que el paso creó."
+		},
+		"mutatedNodeIds": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			},
+			"description": "Ids de los nodos que el paso modificó."
+		},
+		"removedNodeIds": {
+			"description": "Ids de los nodos que ya no existen: no se piden en capturas.",
+			"type": "array",
+			"items": {
+				"type": "string"
+			}
+		},
+		"warnings": {
+			"description": "Avisos del paso: se suman al aviso de la respuesta.",
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"code": {
+						"type": "string",
+						"minLength": 1
+					},
+					"message": {
+						"type": "string"
+					},
+					"nodeId": {
+						"type": "string"
+					}
+				},
+				"required": ["code", "message"],
+				"additionalProperties": false
+			}
+		},
+		"report": {
+			"description": "Datos libres del paso: van al histórico, no a la respuesta.",
+			"type": "object",
+			"propertyNames": {
+				"type": "string"
+			},
+			"additionalProperties": {}
+		}
+	},
+	"required": ["createdNodeIds", "mutatedNodeIds"],
+	"additionalProperties": false
+}

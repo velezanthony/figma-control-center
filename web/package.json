@@ -1,0 +1,8 @@
+{
+	"name": "figma-control-center-web",
+	"private": true,
+	"type": "module",
+	"imports": {
+		"#web/*": "./src/*"
+	}
+}

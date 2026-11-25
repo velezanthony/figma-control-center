@@ -1,0 +1,321 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"type": "object",
+	"properties": {
+		"contract": {
+			"type": "string",
+			"const": "map@1"
+		},
+		"tokens": {
+			"type": "object",
+			"properties": {
+				"collections": {
+					"minItems": 1,
+					"type": "array",
+					"items": {
+						"type": "string",
+						"minLength": 1
+					},
+					"description": "Colecciones de variables donde buscar."
+				},
+				"classPrefixes": {
+					"type": "object",
+					"properties": {
+						"fill": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"minLength": 1
+							}
+						},
+						"text": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"minLength": 1
+							}
+						},
+						"stroke": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"minLength": 1
+							}
+						},
+						"svg": {
+							"description": "Para el color de un svg; sin él, text + stroke + fill.",
+							"type": "array",
+							"items": {
+								"type": "string",
+								"minLength": 1
+							}
+						}
+					},
+					"required": ["fill", "text", "stroke"],
+					"additionalProperties": false
+				},
+				"classToVariable": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"from": {
+								"type": "string",
+								"minLength": 1,
+								"description": "Expresión regular sobre la clase sin prefijo."
+							},
+							"to": {
+								"type": "string",
+								"minLength": 1,
+								"description": "Nombre de la variable; `$1` es el primer grupo."
+							}
+						},
+						"required": ["from", "to"],
+						"additionalProperties": false
+					},
+					"description": "En orden: la primera que da una variable."
+				},
+				"fallback": {
+					"description": "Si ninguna clase sirve: la primera variable de esa colección con ese color.",
+					"type": "object",
+					"properties": {
+						"collection": {
+							"type": "string",
+							"minLength": 1
+						}
+					},
+					"required": ["collection"],
+					"additionalProperties": false
+				},
+				"numbers": {
+					"description": "Variables numéricas por valor exacto (±0,01).",
+					"type": "object",
+					"properties": {
+						"radius": {
+							"type": "object",
+							"properties": {
+								"prefix": {
+									"type": "string",
+									"minLength": 1
+								},
+								"full": {
+									"type": "string",
+									"minLength": 1
+								}
+							},
+							"required": ["prefix"],
+							"additionalProperties": false
+						},
+						"spacing": {
+							"type": "object",
+							"properties": {
+								"prefix": {
+									"type": "string",
+									"minLength": 1
+								}
+							},
+							"required": ["prefix"],
+							"additionalProperties": false
+						}
+					},
+					"additionalProperties": false
+				}
+			},
+			"required": ["collections", "classPrefixes", "classToVariable"],
+			"additionalProperties": false
+		},
+		"fonts": {
+			"type": "object",
+			"properties": {
+				"families": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"match": {
+								"type": "string",
+								"minLength": 1
+							},
+							"family": {
+								"type": "string",
+								"minLength": 1
+							}
+						},
+						"required": ["match", "family"],
+						"additionalProperties": false
+					}
+				},
+				"default": {
+					"type": "string",
+					"minLength": 1
+				},
+				"styles": {
+					"type": "object",
+					"propertyNames": {
+						"type": "string",
+						"minLength": 1
+					},
+					"additionalProperties": {
+						"type": "string",
+						"minLength": 1
+					},
+					"description": "Peso CSS → estilo de Figma («400»: «Regular»)."
+				},
+				"italic": {
+					"type": "object",
+					"properties": {
+						"suffix": {
+							"type": "string",
+							"minLength": 1
+						}
+					},
+					"required": ["suffix"],
+					"additionalProperties": false
+				},
+				"strict": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"minLength": 1
+					}
+				},
+				"fallback": {
+					"type": "string",
+					"minLength": 1
+				}
+			},
+			"required": ["families", "default", "styles", "italic"],
+			"additionalProperties": false
+		},
+		"effects": {
+			"type": "object",
+			"properties": {
+				"classPattern": {
+					"type": "string",
+					"minLength": 1
+				}
+			},
+			"required": ["classPattern"],
+			"additionalProperties": false
+		},
+		"icons": {
+			"type": "object",
+			"properties": {
+				"pages": {
+					"type": "string",
+					"minLength": 1,
+					"description": "Expresión regular del nombre de las páginas de iconos."
+				},
+				"prefix": {
+					"type": "string",
+					"minLength": 1,
+					"description": "Lo que lleva delante el nombre de cada icono en Figma."
+				},
+				"catalog": {
+					"type": "string",
+					"minLength": 1,
+					"description": "Ruta a un JSON [{ name, svg }], relativa a este fichero."
+				},
+				"glyphs": {
+					"type": "object",
+					"properties": {
+						"classPattern": {
+							"type": "string",
+							"minLength": 1
+						},
+						"prefix": {
+							"type": "string",
+							"minLength": 1
+						}
+					},
+					"required": ["classPattern", "prefix"],
+					"additionalProperties": false
+				}
+			},
+			"required": ["pages", "prefix", "catalog"],
+			"additionalProperties": false
+		},
+		"layers": {
+			"type": "object",
+			"properties": {
+				"roles": {
+					"type": "object",
+					"propertyNames": {
+						"type": "string",
+						"minLength": 1
+					},
+					"additionalProperties": {
+						"type": "string",
+						"minLength": 1
+					}
+				},
+				"textPrefix": {
+					"type": "boolean"
+				}
+			},
+			"required": ["roles", "textPrefix"],
+			"additionalProperties": false
+		},
+		"screen": {
+			"type": "object",
+			"properties": {
+				"background": {
+					"type": "string",
+					"minLength": 1
+				}
+			},
+			"additionalProperties": false
+		},
+		"components": {
+			"type": "object",
+			"properties": {
+				"fingerprints": {
+					"type": "string",
+					"minLength": 1,
+					"description": "Ruta a un JSON { <componente>: huella }, relativa a este fichero."
+				},
+				"leaf": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"minLength": 1
+					},
+					"description": "Los componentes de las huellas que se reconocen."
+				},
+				"genericClasses": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"minLength": 1
+					},
+					"description": "Clases de maquetación que no distinguen un componente: expresiones sobre la clase entera."
+				}
+			},
+			"required": ["fingerprints", "leaf", "genericClasses"],
+			"additionalProperties": false
+		},
+		"screens": {
+			"type": "object",
+			"propertyNames": {
+				"type": "string",
+				"minLength": 1
+			},
+			"additionalProperties": {
+				"type": "object",
+				"properties": {
+					"rules": {
+						"description": "Las reglas de recognize@1 que se prueban en esa pantalla; sin ellas, todas.",
+						"type": "array",
+						"items": {
+							"type": "string",
+							"minLength": 1
+						}
+					}
+				},
+				"additionalProperties": false
+			}
+		}
+	},
+	"required": ["contract", "tokens", "fonts", "icons", "layers"],
+	"additionalProperties": false
+}

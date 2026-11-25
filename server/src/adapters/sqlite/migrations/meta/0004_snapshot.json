@@ -1,0 +1,1427 @@
+{
+	"version": "6",
+	"dialect": "sqlite",
+	"id": "248483d1-3dc2-40d7-9994-9e7bad90e3d5",
+	"prevId": "5159713f-d317-41f9-8a98-358bbc1ae587",
+	"tables": {
+		"build_steps": {
+			"name": "build_steps",
+			"columns": {
+				"project_id": {
+					"name": "project_id",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"job_id": {
+					"name": "job_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"step_index": {
+					"name": "step_index",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"file": {
+					"name": "file",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"status": {
+					"name": "status",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"ms": {
+					"name": "ms",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"touched_count": {
+					"name": "touched_count",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false,
+					"default": 0
+				},
+				"error_type": {
+					"name": "error_type",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"error_message": {
+					"name": "error_message",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"next_step": {
+					"name": "next_step",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"error_line": {
+					"name": "error_line",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"warning": {
+					"name": "warning",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"result_json": {
+					"name": "result_json",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"result_path": {
+					"name": "result_path",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"result_bytes": {
+					"name": "result_bytes",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {
+				"build_steps_project_id_projects_id_fk": {
+					"name": "build_steps_project_id_projects_id_fk",
+					"tableFrom": "build_steps",
+					"tableTo": "projects",
+					"columnsFrom": ["project_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "no action"
+				}
+			},
+			"compositePrimaryKeys": {
+				"build_steps_project_id_job_id_step_index_pk": {
+					"columns": ["project_id", "job_id", "step_index"],
+					"name": "build_steps_project_id_job_id_step_index_pk"
+				}
+			},
+			"uniqueConstraints": {},
+			"checkConstraints": {}
+		},
+		"call_nodes": {
+			"name": "call_nodes",
+			"columns": {
+				"project_id": {
+					"name": "project_id",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"call_id": {
+					"name": "call_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"node_id": {
+					"name": "node_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				}
+			},
+			"indexes": {
+				"call_nodes_project_node": {
+					"name": "call_nodes_project_node",
+					"columns": ["project_id", "node_id"],
+					"isUnique": false
+				}
+			},
+			"foreignKeys": {
+				"call_nodes_project_id_projects_id_fk": {
+					"name": "call_nodes_project_id_projects_id_fk",
+					"tableFrom": "call_nodes",
+					"tableTo": "projects",
+					"columnsFrom": ["project_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "no action"
+				},
+				"call_nodes_project_id_call_id_calls_project_id_call_id_fk": {
+					"name": "call_nodes_project_id_call_id_calls_project_id_call_id_fk",
+					"tableFrom": "call_nodes",
+					"tableTo": "calls",
+					"columnsFrom": ["project_id", "call_id"],
+					"columnsTo": ["project_id", "call_id"],
+					"onDelete": "cascade",
+					"onUpdate": "no action"
+				}
+			},
+			"compositePrimaryKeys": {
+				"call_nodes_project_id_call_id_node_id_pk": {
+					"columns": ["project_id", "call_id", "node_id"],
+					"name": "call_nodes_project_id_call_id_node_id_pk"
+				}
+			},
+			"uniqueConstraints": {},
+			"checkConstraints": {}
+		},
+		"calls": {
+			"name": "calls",
+			"columns": {
+				"project_id": {
+					"name": "project_id",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"call_id": {
+					"name": "call_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"session_id": {
+					"name": "session_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"started_at": {
+					"name": "started_at",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"finished_at": {
+					"name": "finished_at",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"tool": {
+					"name": "tool",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"status": {
+					"name": "status",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"ms": {
+					"name": "ms",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"is_write": {
+					"name": "is_write",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"error_type": {
+					"name": "error_type",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"error_message": {
+					"name": "error_message",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"next_step": {
+					"name": "next_step",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"error_line": {
+					"name": "error_line",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"retryable": {
+					"name": "retryable",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"job_id": {
+					"name": "job_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"starts_job": {
+					"name": "starts_job",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false,
+					"default": false
+				},
+				"args_summary": {
+					"name": "args_summary",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"result_path": {
+					"name": "result_path",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"summary": {
+					"name": "summary",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"touched_count": {
+					"name": "touched_count",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false,
+					"default": 0
+				},
+				"extra_text": {
+					"name": "extra_text",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false,
+					"default": "''"
+				}
+			},
+			"indexes": {
+				"calls_project_started": {
+					"name": "calls_project_started",
+					"columns": ["project_id", "started_at"],
+					"isUnique": false
+				},
+				"calls_project_session_started": {
+					"name": "calls_project_session_started",
+					"columns": ["project_id", "session_id", "started_at"],
+					"isUnique": false
+				},
+				"calls_project_tool_started": {
+					"name": "calls_project_tool_started",
+					"columns": ["project_id", "tool", "started_at"],
+					"isUnique": false
+				},
+				"calls_project_status_started": {
+					"name": "calls_project_status_started",
+					"columns": ["project_id", "status", "started_at"],
+					"isUnique": false
+				},
+				"calls_project_job": {
+					"name": "calls_project_job",
+					"columns": ["project_id", "job_id"],
+					"isUnique": false
+				}
+			},
+			"foreignKeys": {
+				"calls_project_id_projects_id_fk": {
+					"name": "calls_project_id_projects_id_fk",
+					"tableFrom": "calls",
+					"tableTo": "projects",
+					"columnsFrom": ["project_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "no action"
+				},
+				"calls_project_id_session_id_sessions_project_id_id_fk": {
+					"name": "calls_project_id_session_id_sessions_project_id_id_fk",
+					"tableFrom": "calls",
+					"tableTo": "sessions",
+					"columnsFrom": ["project_id", "session_id"],
+					"columnsTo": ["project_id", "id"],
+					"onDelete": "cascade",
+					"onUpdate": "no action"
+				}
+			},
+			"compositePrimaryKeys": {
+				"calls_project_id_call_id_pk": {
+					"columns": ["project_id", "call_id"],
+					"name": "calls_project_id_call_id_pk"
+				}
+			},
+			"uniqueConstraints": {},
+			"checkConstraints": {}
+		},
+		"cancel_requests": {
+			"name": "cancel_requests",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "integer",
+					"primaryKey": true,
+					"notNull": true,
+					"autoincrement": true
+				},
+				"project_id": {
+					"name": "project_id",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"session_id": {
+					"name": "session_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"job_id": {
+					"name": "job_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"at": {
+					"name": "at",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"status": {
+					"name": "status",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"handled_at": {
+					"name": "handled_at",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				}
+			},
+			"indexes": {
+				"cancel_project_job": {
+					"name": "cancel_project_job",
+					"columns": ["project_id", "job_id"],
+					"isUnique": true
+				},
+				"cancel_project_session_status": {
+					"name": "cancel_project_session_status",
+					"columns": ["project_id", "session_id", "status"],
+					"isUnique": false
+				}
+			},
+			"foreignKeys": {
+				"cancel_requests_project_id_projects_id_fk": {
+					"name": "cancel_requests_project_id_projects_id_fk",
+					"tableFrom": "cancel_requests",
+					"tableTo": "projects",
+					"columnsFrom": ["project_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "no action"
+				},
+				"cancel_requests_project_id_session_id_sessions_project_id_id_fk": {
+					"name": "cancel_requests_project_id_session_id_sessions_project_id_id_fk",
+					"tableFrom": "cancel_requests",
+					"tableTo": "sessions",
+					"columnsFrom": ["project_id", "session_id"],
+					"columnsTo": ["project_id", "id"],
+					"onDelete": "cascade",
+					"onUpdate": "no action"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"checkConstraints": {}
+		},
+		"captures": {
+			"name": "captures",
+			"columns": {
+				"project_id": {
+					"name": "project_id",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"call_id": {
+					"name": "call_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"node_id": {
+					"name": "node_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"path": {
+					"name": "path",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"width": {
+					"name": "width",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"height": {
+					"name": "height",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"at": {
+					"name": "at",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				}
+			},
+			"indexes": {
+				"captures_project_at": {
+					"name": "captures_project_at",
+					"columns": ["project_id", "at"],
+					"isUnique": false
+				}
+			},
+			"foreignKeys": {
+				"captures_project_id_projects_id_fk": {
+					"name": "captures_project_id_projects_id_fk",
+					"tableFrom": "captures",
+					"tableTo": "projects",
+					"columnsFrom": ["project_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "no action"
+				},
+				"captures_project_id_call_id_calls_project_id_call_id_fk": {
+					"name": "captures_project_id_call_id_calls_project_id_call_id_fk",
+					"tableFrom": "captures",
+					"tableTo": "calls",
+					"columnsFrom": ["project_id", "call_id"],
+					"columnsTo": ["project_id", "call_id"],
+					"onDelete": "cascade",
+					"onUpdate": "no action"
+				}
+			},
+			"compositePrimaryKeys": {
+				"captures_project_id_call_id_path_pk": {
+					"columns": ["project_id", "call_id", "path"],
+					"name": "captures_project_id_call_id_path_pk"
+				}
+			},
+			"uniqueConstraints": {},
+			"checkConstraints": {}
+		},
+		"chat_messages": {
+			"name": "chat_messages",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "integer",
+					"primaryKey": true,
+					"notNull": true,
+					"autoincrement": true
+				},
+				"project_id": {
+					"name": "project_id",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"session_id": {
+					"name": "session_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"direction": {
+					"name": "direction",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"chat_id": {
+					"name": "chat_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"body": {
+					"name": "body",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"at": {
+					"name": "at",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"delivered_at": {
+					"name": "delivered_at",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"status": {
+					"name": "status",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"sender_hash": {
+					"name": "sender_hash",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				}
+			},
+			"indexes": {
+				"chat_project_session_id": {
+					"name": "chat_project_session_id",
+					"columns": ["project_id", "session_id", "id"],
+					"isUnique": false
+				},
+				"chat_project_pending": {
+					"name": "chat_project_pending",
+					"columns": ["project_id", "session_id", "direction", "status"],
+					"isUnique": false
+				},
+				"chat_project_chat": {
+					"name": "chat_project_chat",
+					"columns": ["project_id", "session_id", "chat_id"],
+					"isUnique": false
+				}
+			},
+			"foreignKeys": {
+				"chat_messages_project_id_projects_id_fk": {
+					"name": "chat_messages_project_id_projects_id_fk",
+					"tableFrom": "chat_messages",
+					"tableTo": "projects",
+					"columnsFrom": ["project_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "no action"
+				},
+				"chat_messages_project_id_session_id_sessions_project_id_id_fk": {
+					"name": "chat_messages_project_id_session_id_sessions_project_id_id_fk",
+					"tableFrom": "chat_messages",
+					"tableTo": "sessions",
+					"columnsFrom": ["project_id", "session_id"],
+					"columnsTo": ["project_id", "id"],
+					"onDelete": "cascade",
+					"onUpdate": "no action"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"checkConstraints": {}
+		},
+		"events": {
+			"name": "events",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "integer",
+					"primaryKey": true,
+					"notNull": true,
+					"autoincrement": true
+				},
+				"project_id": {
+					"name": "project_id",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"session_id": {
+					"name": "session_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"call_id": {
+					"name": "call_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"at": {
+					"name": "at",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"type": {
+					"name": "type",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"payload": {
+					"name": "payload",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				}
+			},
+			"indexes": {
+				"events_project_id": {
+					"name": "events_project_id",
+					"columns": ["project_id", "id"],
+					"isUnique": false
+				},
+				"events_project_at": {
+					"name": "events_project_at",
+					"columns": ["project_id", "at"],
+					"isUnique": false
+				},
+				"events_project_session_at": {
+					"name": "events_project_session_at",
+					"columns": ["project_id", "session_id", "at"],
+					"isUnique": false
+				},
+				"events_project_call": {
+					"name": "events_project_call",
+					"columns": ["project_id", "call_id"],
+					"isUnique": false
+				},
+				"events_project_type_id": {
+					"name": "events_project_type_id",
+					"columns": ["project_id", "type", "id"],
+					"isUnique": false
+				}
+			},
+			"foreignKeys": {
+				"events_project_id_projects_id_fk": {
+					"name": "events_project_id_projects_id_fk",
+					"tableFrom": "events",
+					"tableTo": "projects",
+					"columnsFrom": ["project_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "no action"
+				},
+				"events_project_id_session_id_sessions_project_id_id_fk": {
+					"name": "events_project_id_session_id_sessions_project_id_id_fk",
+					"tableFrom": "events",
+					"tableTo": "sessions",
+					"columnsFrom": ["project_id", "session_id"],
+					"columnsTo": ["project_id", "id"],
+					"onDelete": "cascade",
+					"onUpdate": "no action"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"checkConstraints": {}
+		},
+		"jobs": {
+			"name": "jobs",
+			"columns": {
+				"project_id": {
+					"name": "project_id",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"id": {
+					"name": "id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"session_id": {
+					"name": "session_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"call_id": {
+					"name": "call_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"started_at": {
+					"name": "started_at",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"finished_at": {
+					"name": "finished_at",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"status": {
+					"name": "status",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"ms": {
+					"name": "ms",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"error_type": {
+					"name": "error_type",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"error_message": {
+					"name": "error_message",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"next_step": {
+					"name": "next_step",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"error_line": {
+					"name": "error_line",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"touched_json": {
+					"name": "touched_json",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false,
+					"default": "'[]'"
+				}
+			},
+			"indexes": {
+				"jobs_project_call": {
+					"name": "jobs_project_call",
+					"columns": ["project_id", "call_id"],
+					"isUnique": false
+				},
+				"jobs_project_status": {
+					"name": "jobs_project_status",
+					"columns": ["project_id", "status"],
+					"isUnique": false
+				}
+			},
+			"foreignKeys": {
+				"jobs_project_id_projects_id_fk": {
+					"name": "jobs_project_id_projects_id_fk",
+					"tableFrom": "jobs",
+					"tableTo": "projects",
+					"columnsFrom": ["project_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "no action"
+				}
+			},
+			"compositePrimaryKeys": {
+				"jobs_project_id_id_pk": {
+					"columns": ["project_id", "id"],
+					"name": "jobs_project_id_id_pk"
+				}
+			},
+			"uniqueConstraints": {},
+			"checkConstraints": {}
+		},
+		"meta": {
+			"name": "meta",
+			"columns": {
+				"project_id": {
+					"name": "project_id",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"key": {
+					"name": "key",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"value": {
+					"name": "value",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {
+				"meta_project_id_projects_id_fk": {
+					"name": "meta_project_id_projects_id_fk",
+					"tableFrom": "meta",
+					"tableTo": "projects",
+					"columnsFrom": ["project_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "no action"
+				}
+			},
+			"compositePrimaryKeys": {
+				"meta_project_id_key_pk": {
+					"columns": ["project_id", "key"],
+					"name": "meta_project_id_key_pk"
+				}
+			},
+			"uniqueConstraints": {},
+			"checkConstraints": {}
+		},
+		"migration_reports": {
+			"name": "migration_reports",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "integer",
+					"primaryKey": true,
+					"notNull": true,
+					"autoincrement": true
+				},
+				"at": {
+					"name": "at",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"report": {
+					"name": "report",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"checkConstraints": {}
+		},
+		"nodes_touched": {
+			"name": "nodes_touched",
+			"columns": {
+				"project_id": {
+					"name": "project_id",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"node_id": {
+					"name": "node_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"file_url": {
+					"name": "file_url",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"first_at": {
+					"name": "first_at",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"last_at": {
+					"name": "last_at",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"touch_count": {
+					"name": "touch_count",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"last_session_id": {
+					"name": "last_session_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"last_call_id": {
+					"name": "last_call_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {
+				"nodes_touched_project_id_projects_id_fk": {
+					"name": "nodes_touched_project_id_projects_id_fk",
+					"tableFrom": "nodes_touched",
+					"tableTo": "projects",
+					"columnsFrom": ["project_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "no action"
+				}
+			},
+			"compositePrimaryKeys": {
+				"nodes_touched_project_id_node_id_pk": {
+					"columns": ["project_id", "node_id"],
+					"name": "nodes_touched_project_id_node_id_pk"
+				}
+			},
+			"uniqueConstraints": {},
+			"checkConstraints": {}
+		},
+		"permission_requests": {
+			"name": "permission_requests",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "integer",
+					"primaryKey": true,
+					"notNull": true,
+					"autoincrement": true
+				},
+				"project_id": {
+					"name": "project_id",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"session_id": {
+					"name": "session_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"request_id": {
+					"name": "request_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"tool_name": {
+					"name": "tool_name",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"description": {
+					"name": "description",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"input_preview": {
+					"name": "input_preview",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"at": {
+					"name": "at",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"status": {
+					"name": "status",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"decided_at": {
+					"name": "decided_at",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"decider_hash": {
+					"name": "decider_hash",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"sent_at": {
+					"name": "sent_at",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				}
+			},
+			"indexes": {
+				"permission_project_session_request": {
+					"name": "permission_project_session_request",
+					"columns": ["project_id", "session_id", "request_id"],
+					"isUnique": true
+				},
+				"permission_project_session_id": {
+					"name": "permission_project_session_id",
+					"columns": ["project_id", "session_id", "id"],
+					"isUnique": false
+				}
+			},
+			"foreignKeys": {
+				"permission_requests_project_id_projects_id_fk": {
+					"name": "permission_requests_project_id_projects_id_fk",
+					"tableFrom": "permission_requests",
+					"tableTo": "projects",
+					"columnsFrom": ["project_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "no action"
+				},
+				"permission_requests_project_id_session_id_sessions_project_id_id_fk": {
+					"name": "permission_requests_project_id_session_id_sessions_project_id_id_fk",
+					"tableFrom": "permission_requests",
+					"tableTo": "sessions",
+					"columnsFrom": ["project_id", "session_id"],
+					"columnsTo": ["project_id", "id"],
+					"onDelete": "cascade",
+					"onUpdate": "no action"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"checkConstraints": {}
+		},
+		"projects": {
+			"name": "projects",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "integer",
+					"primaryKey": true,
+					"notNull": true,
+					"autoincrement": true
+				},
+				"name": {
+					"name": "name",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"project_dir": {
+					"name": "project_dir",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"file_url": {
+					"name": "file_url",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"file_key": {
+					"name": "file_key",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"scripts_roots": {
+					"name": "scripts_roots",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"output_dir": {
+					"name": "output_dir",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				}
+			},
+			"indexes": {
+				"projects_file_key": {
+					"name": "projects_file_key",
+					"columns": ["file_key"],
+					"isUnique": true
+				},
+				"projects_output_dir": {
+					"name": "projects_output_dir",
+					"columns": ["output_dir"],
+					"isUnique": true
+				}
+			},
+			"foreignKeys": {},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"checkConstraints": {}
+		},
+		"sessions": {
+			"name": "sessions",
+			"columns": {
+				"project_id": {
+					"name": "project_id",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"id": {
+					"name": "id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"started_at": {
+					"name": "started_at",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"last_seen_at": {
+					"name": "last_seen_at",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"pid": {
+					"name": "pid",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"file_url": {
+					"name": "file_url",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				},
+				"calls": {
+					"name": "calls",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false,
+					"default": 0
+				},
+				"writes": {
+					"name": "writes",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false,
+					"default": 0
+				},
+				"errors": {
+					"name": "errors",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false,
+					"default": 0
+				},
+				"total_ms": {
+					"name": "total_ms",
+					"type": "integer",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false,
+					"default": 0
+				},
+				"chat_token_hash": {
+					"name": "chat_token_hash",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false,
+					"autoincrement": false
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {
+				"sessions_project_id_projects_id_fk": {
+					"name": "sessions_project_id_projects_id_fk",
+					"tableFrom": "sessions",
+					"tableTo": "projects",
+					"columnsFrom": ["project_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "no action"
+				}
+			},
+			"compositePrimaryKeys": {
+				"sessions_project_id_id_pk": {
+					"columns": ["project_id", "id"],
+					"name": "sessions_project_id_id_pk"
+				}
+			},
+			"uniqueConstraints": {},
+			"checkConstraints": {}
+		},
+		"settings": {
+			"name": "settings",
+			"columns": {
+				"key": {
+					"name": "key",
+					"type": "text",
+					"primaryKey": true,
+					"notNull": true,
+					"autoincrement": false
+				},
+				"value": {
+					"name": "value",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true,
+					"autoincrement": false
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {},
+			"checkConstraints": {}
+		}
+	},
+	"views": {},
+	"enums": {},
+	"_meta": {
+		"schemas": {},
+		"tables": {},
+		"columns": {}
+	},
+	"internal": {
+		"indexes": {}
+	}
+}

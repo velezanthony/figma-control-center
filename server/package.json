@@ -1,0 +1,10 @@
+{
+	"name": "figma-control-center-server",
+	"private": true,
+	"type": "module",
+	"imports": {
+		"#domain/*": "./src/domain/*",
+		"#application/*": "./src/application/*",
+		"#adapters/*": "./src/adapters/*"
+	}
+}

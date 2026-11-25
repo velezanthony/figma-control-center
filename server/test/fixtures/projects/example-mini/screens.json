@@ -1,0 +1,100 @@
+{
+	"contract": "screens@1",
+	"screens": [
+		{
+			"key": "inicio",
+			"title": "Inicio",
+			"url": "/"
+		},
+		{
+			"key": "menu-abierto",
+			"title": "Menú abierto",
+			"url": "/",
+			"pick": "header",
+			"variants": [
+				{
+					"props": {
+						"menu": "abierto"
+					},
+					"run": [
+						{
+							"click": "#abrir-menu"
+						}
+					],
+					"until": "document.getElementById('menu').offsetHeight > 0"
+				}
+			]
+		},
+		{
+			"key": "privado",
+			"title": "Privado",
+			"url": "/privado/",
+			"session": "lector"
+		},
+		{
+			"key": "nunca",
+			"title": "Nunca",
+			"url": "/",
+			"until": "document.getElementById('no-existe')"
+		},
+		{
+			"key": "desde-pagina",
+			"title": "Desde la página",
+			"url": "/",
+			"variants": [
+				{
+					"props": {},
+					"run": [
+						{
+							"evaluateInPage": "document.getElementById('estado').textContent = window.app.mensaje"
+						}
+					]
+				}
+			]
+		},
+		{
+			"key": "salir",
+			"title": "Salir",
+			"url": "/",
+			"variants": [
+				{
+					"props": {},
+					"run": [
+						{
+							"click": "#fuera"
+						}
+					]
+				}
+			]
+		},
+		{
+			"key": "cmp-marca",
+			"title": "Marca",
+			"url": "/componente/",
+			"pick": "#cmp",
+			"viewport": {
+				"w": 300,
+				"h": 200
+			},
+			"variants": [
+				{
+					"props": {
+						"tamano": "sm"
+					},
+					"query": {
+						"tamano": "sm"
+					}
+				},
+				{
+					"props": {
+						"tamano": "lg"
+					},
+					"query": {
+						"tamano": "lg",
+						"etiqueta": "Marca grande"
+					}
+				}
+			]
+		}
+	]
+}
