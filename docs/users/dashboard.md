@@ -10,6 +10,10 @@ A local web page that shows, live, what the server does: every tool call, how lo
 with their next step, long jobs, touched nodes (with a link into Figma) and screenshots. It is also
 where projects are registered, settings edited and the agent chat lives.
 
+![A tour of the dashboard: Home, Activity, Jobs, Captures, Attempts, Chat, Projects, Settings and Help](../assets/dashboard/tour-light.gif)
+
+The interface is in Spanish for now.
+
 ```bash
 make dashboard     # builds web/ and serves it on http://127.0.0.1:4173 (FCC_DASHBOARD_PORT)
 ```
@@ -44,6 +48,18 @@ link shares it. The selected project travels as `?project=<number>`.
 > [!NOTE]
 > Without any project, only Home, Projects, Settings, Help and Components (in development mode) are enabled.
 
+Home answers "is everything ready?" at a glance, and lists the latest calls and errors:
+
+![Home: status pills for the dashboard, Chrome, Figma and the agent, the latest calls and the recent errors](../assets/dashboard/home.webp)
+
+Activity is the whole record, with its KPIs, filters and a sortable table:
+
+![Activity: KPIs for calls, errors, running work, mean duration and touched nodes, above the filtered table of calls](../assets/dashboard/activity.webp)
+
+Captures keeps every screenshot next to the call that took it:
+
+![Captures: a grid of node screenshots with their node id, size, time and a link to the call](../assets/dashboard/captures.webp)
+
 New events arrive over Server-Sent Events with the id of the last one seen, and resume after a
 reconnection. Codes that are not self-explanatory (`ScriptError`, session ids, `p95`, node ids…)
 carry a tooltip, also reachable from the keyboard, drawn from the same module as the glossary.
@@ -62,6 +78,8 @@ shows all its attempts and, between two of them (by default the last and the one
 each role and the line-by-line diff of one. Dates are local time. No button writes to Figma or repeats
 an attempt. It is the same computation `figma_history_diff` uses.
 
+![Attempts: the targets with their kind, number of attempts, last status and time, with filters on top](../assets/dashboard/attempts.webp)
+
 ## Settings
 
 `#/settings` lists every editable setting, grouped, with its help text, unit and who uses it (dashboard,
@@ -69,6 +87,8 @@ agent or both), the value in effect and where it comes from: default, saved in t
 by the environment (read-only here). Saving or resetting applies to the next session that starts and
 to the dashboard on its next start. Ports, paths, the database and the terminal command are boot
 settings and only change in the `.env`. See [Configuration](configuration.md).
+
+![Settings: each setting with its help text, environment variable, value in effect, default and a save button](../assets/dashboard/settings.webp)
 
 ## Working on the UI
 

@@ -78,6 +78,10 @@ params, el kit y, en los pasos del kit, los planes y ficheros del proyecto que l
 ejecuciones del mismo objetivo se pueden comparar línea a línea. Ver [Intentos](tools.es.md#intentos) y
 la [página Intentos](dashboard.es.md#intentos) del panel.
 
+Aquí, entre los intentos 12 y 13 de un script, solo cambiaron los parámetros:
+
+![Intentos: los papeles de dos intentos comparados, con el script y el kit iguales y el diff por líneas de los parámetros](../assets/dashboard/attempt-diff.webp)
+
 ## Pasos del kit
 
 Un paso del kit es un paso de `figma_build` cuyo código viene con el kit: sin fichero de script, solo

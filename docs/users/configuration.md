@@ -103,6 +103,10 @@ Settings page.
 are read by the test suite; see [Testing](../contributors/testing.md). Variables used only inside the
 test harness are not listed here.
 
+One group of the Settings page:
+
+![The Chrome and Figma group of Settings: each setting with its help text, environment variable, value in effect, default and a Save button](../assets/dashboard/settings-group.webp)
+
 ## Projects
 
 A project is one Figma file plus the folders the tools may touch for it. It is registered on the

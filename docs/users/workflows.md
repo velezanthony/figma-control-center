@@ -82,6 +82,10 @@ The server turns the latest valid capture into a `screen@1` plan (in `screen-pla
 paints it: frames with auto-layout, fills and strokes bound to variables, text styles, recognised
 components as instances. Anything without a variable is reported, not invented.
 
+The dashboard's own Settings page, in the browser and painted in Figma from a capture:
+
+![Settings side by side: the page in the browser on the left, the screen built in Figma on the right](../assets/dashboard/web-vs-figma.webp)
+
 ### 5. Place it in its area — `areas@1`
 
 `areas.json` describes the file's areas: the page, the frame size, how a built screen is placed, the

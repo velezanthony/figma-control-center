@@ -31,6 +31,10 @@ The Figma tools answer with the same shape:
 > **Large data never travels through the conversation.** Scripts are passed by path, reads go to files,
 > and the response carries the path plus a small summary. Read the file when you need the detail.
 
+In the dashboard, a failed call opens to its error type, message and next step:
+
+![An Activity row opened on a ScriptError: the message with its line and the next step, above the call's arguments](../assets/dashboard/activity-error.webp)
+
 ## Jobs
 
 A call that outlives the soft deadline (`FCC_SOFT_DEADLINE_MS`) answers `status: "running"` with a
@@ -46,6 +50,10 @@ A call that outlives the soft deadline (`FCC_SOFT_DEADLINE_MS`) answers `status:
 > If the client goes away mid-job, the job ends `Interrupted` and the script may have kept going.
 > For anything long, split it into steps with `figma_build`, which can be cancelled between steps
 > and says where it stopped.
+
+The dashboard's **Jobs** page lists them with their state:
+
+![The Jobs page: when each job started, its tool, its id and its final state, finished or failed](../assets/dashboard/jobs-list.webp)
 
 ## Figma
 

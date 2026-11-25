@@ -23,6 +23,18 @@ const EDGE = 8;
 const clamp = (value: number, min: number, max: number): number =>
 	Math.max(min, Math.min(value, Math.max(min, max)));
 
+// Tamaño de maqueta desde el estilo calculado, que no encoge la transformación de entrada (`starting:scale-95`);
+// redondeado hacia arriba para que el flotante nunca invada el margen con el borde
+export function layoutSize(style: {
+	readonly width: string;
+	readonly height: string;
+}): Size {
+	return {
+		width: Math.ceil(Number.parseFloat(style.width)),
+		height: Math.ceil(Number.parseFloat(style.height)),
+	};
+}
+
 // Posición `fixed` de un flotante junto a su disparador: se voltea si no cabe y no se sale de la ventana
 export function placeFloating(
 	trigger: Rect,

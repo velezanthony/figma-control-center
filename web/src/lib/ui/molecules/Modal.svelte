@@ -53,15 +53,21 @@ const SIZE: Record<ModalSize, string> = {
 };
 
 // Escape: el padre decide si cierra (p. ej. no mientras guarda); el <dialog> solo se cierra con `open`
+// Un segundo Escape sin gesto no se deja cancelar y el navegador cierra él solo, con el `close` algo después:
+// el padre decide ya, en la pulsación, y no cuando llegue el `close` (para entonces pudo dejar de estar ocupado)
+let decidedOnCancel = false;
 function onCancel(event: Event): void {
 	event.preventDefault();
 	onclose();
+	if (!event.cancelable) decidedOnCancel = true;
 }
 
-// Si el navegador lo cierra por su cuenta (un segundo Escape sin gesto no deja cancelarlo), el estado no se separa
+// Si el navegador lo cierra por su cuenta, el estado no se separa: se vuelve a abrir si el padre lo quiere abierto
 function onNativeClose(): void {
+	const decided = decidedOnCancel;
+	decidedOnCancel = false;
 	if (!open) return;
-	onclose();
+	if (!decided) onclose();
 	if (open && dialog !== null && !dialog.open) dialog.showModal();
 }
 

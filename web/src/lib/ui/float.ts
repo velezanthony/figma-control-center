@@ -1,4 +1,4 @@
-import { type Placement, placeFloating } from "./floating.ts";
+import { layoutSize, type Placement, placeFloating } from "./floating.ts";
 
 export type FloatParams = {
 	readonly anchor: HTMLElement | undefined;
@@ -21,7 +21,7 @@ export function float(node: HTMLElement, initial: FloatParams) {
 		// pequeño, el borde de la ventana se calcularía mal y al crecer se le comería el margen
 		const placed = placeFloating(
 			{ left, top, right, bottom },
-			{ width: node.offsetWidth, height: node.offsetHeight },
+			layoutSize(getComputedStyle(node)),
 			{ width: innerWidth, height: innerHeight },
 			params.placement,
 			params.gap,

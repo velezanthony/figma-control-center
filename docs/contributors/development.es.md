@@ -58,6 +58,10 @@ cablea los adaptadores concretos.
 - **Probar una herramienta a mano** — `make tools` lista las herramientas con la CLI del MCP
   Inspector; `make inspector` abre su interfaz contra `server/src/main.ts`.
 
+La galería, en su pestaña Átomos:
+
+![La galería de componentes en su pestaña Átomos: variantes y tamaños de Button, Badge y StatusDot](../assets/dashboard/gallery-atoms.webp)
+
 ## Los comandos
 
 `make help` lista todos. Los que vas a usar:

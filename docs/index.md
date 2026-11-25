@@ -20,6 +20,10 @@ Tools receive **file paths**, not code. The server reads the script, sends it to
 the tab and keeps big results on disk: the megabytes never pass through the
 model's context.
 
+Everything the server does shows up, live, in a local dashboard:
+
+![A tour of the dashboard: Home, Activity, Jobs, Captures, Attempts, Chat, Projects, Settings and Help](assets/dashboard/tour-light.gif)
+
 **Start here:** [install it](users/installation.md), then [see the tools](users/tools.md).
 
 ## What's inside

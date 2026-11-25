@@ -88,6 +88,10 @@ El servidor convierte la última captura válida en un plan `screen@1` (en `scre
 pinta: frames con auto-layout, rellenos y bordes ligados a variables, estilos de texto, componentes
 reconocidos como instancias. Lo que no tiene variable se informa, no se inventa.
 
+La página de Ajustes del propio panel, en el navegador y pintada en Figma a partir de una captura:
+
+![Ajustes lado a lado: la página en el navegador a la izquierda y la pantalla construida en Figma a la derecha](../assets/dashboard/web-vs-figma.webp)
+
 ### 5. Colócala en su área: `areas@1`
 
 `areas.json` describe las áreas del archivo: la página, el tamaño del frame, cómo se coloca una

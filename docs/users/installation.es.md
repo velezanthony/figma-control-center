@@ -105,6 +105,10 @@ Abre **Proyectos** (`#/projects`) y añade uno:
 | Raíz de scripts | Opcional, una por línea: carpetas de las que las herramientas pueden leer scripts |
 | Carpeta de salida | Opcional: dónde van las capturas de pantalla, las lecturas y las capturas de la web (`output/<id>` por defecto) |
 
+El formulario, relleno:
+
+![El diálogo Nuevo proyecto: nombre, directorio del proyecto, URL del archivo de Figma y, opcionales, la raíz de scripts y la carpeta de salida](../assets/dashboard/project-new.webp)
+
 La base le da al proyecto un número (`1`, `2`, …): ese número es al que se refieren `FCC_PROJECTS`
 y `make agent PROJECT=<n>`. Un proyecto dado de alta con Claude Code abierto se usa sin reiniciar.
 
@@ -114,6 +118,11 @@ En Claude Code (ver [Usarlo desde Claude Code](claude-code.es.md)), llama a `fig
 decir que Chrome responde, que la pestaña está, que `figma` está listo, y el nombre del archivo y de la
 página. Si la pestaña del proyecto no está abierta, el servidor la abre la primera vez que una
 herramienta la necesita y lo dice en `tabOpened`; nunca cierra pestañas que no abrió.
+
+Inicio, en el panel, enseña las mismas comprobaciones en píldoras de estado, con el siguiente paso
+de lo que no está listo:
+
+![Estado en Inicio: panel conectado, Chrome responde, Figma listo con el archivo y la página, y ningún agente escuchando, con un botón Lanzar agente](../assets/dashboard/home-status.webp)
 
 `figma_status` explica cada fallo con un `nextStep`. Los habituales:
 

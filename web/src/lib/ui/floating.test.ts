@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "vitest";
-import { placeFloating } from "./floating.ts";
+import { layoutSize, placeFloating } from "./floating.ts";
 
 const VIEWPORT = { width: 1000, height: 800 };
 const SIZE = { width: 100, height: 40 };
@@ -55,5 +55,20 @@ describe("placeFloating (posición fija junto al disparador)", () => {
 		assert.equal(right.left, 1000 - 100 - 8);
 		const left = placeFloating(at(0, 300), SIZE, VIEWPORT, "bottom", GAP);
 		assert.equal(left.left, 8);
+	});
+});
+
+describe("layoutSize (tamaño de maqueta para colocar el flotante)", () => {
+	it("redondea hacia arriba un ancho fraccionario: con el de abajo se saldría del margen", () => {
+		assert.deepEqual(layoutSize({ width: "234.406px", height: "29px" }), {
+			width: 235,
+			height: 29,
+		});
+	});
+
+	it("pegado al borde derecho, un ancho fraccionario no invade el margen", () => {
+		const size = layoutSize({ width: "234.406px", height: "29px" });
+		const p = placeFloating(at(940, 20), size, VIEWPORT, "bottom-end", GAP);
+		assert.ok(p.left + 234.40625 <= VIEWPORT.width - 8);
 	});
 });
