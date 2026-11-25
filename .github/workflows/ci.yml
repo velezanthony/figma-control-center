@@ -1,9 +1,13 @@
 name: CI
 
+# Work lands on development and reaches main through a pull request; both
+# branches and the pull requests into them are checked. Ubuntu only: the
+# shell scripts target Linux.
 on:
   push:
-    branches: [main]
+    branches: [development, main]
   pull_request:
+    branches: [development, main]
   workflow_dispatch:
 
 # A newer push on the same ref cancels the run it replaces.
