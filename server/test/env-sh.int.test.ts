@@ -269,12 +269,20 @@ describe("login.sh y Makefile sin .env", () => {
 	});
 
 	it("ni el Makefile ni los scripts hacen source del .env", () => {
-		const r = run("rg", [
-			"-n",
-			"source .*\\.env|ENV_FILE\\)",
+		// Se lee con Node: los runners del CI no traen ripgrep.
+		const files = [
 			"Makefile",
-			"spikes/m0",
-		]);
-		assert.doesNotMatch(r.stdout, /source/);
+			...globSync("spikes/m0/**/*", { cwd: REPO_ROOT }),
+		].filter((file) => statSync(join(REPO_ROOT, file)).isFile());
+		const sourcing = files.flatMap((file) =>
+			readFileSync(join(REPO_ROOT, file), "utf8")
+				.split("\n")
+				.filter(
+					(line) =>
+						/source .*\.env|ENV_FILE\)/.test(line) && /source/.test(line),
+				)
+				.map((line) => `${file}: ${line}`),
+		);
+		assert.deepEqual(sourcing, []);
 	});
 });
